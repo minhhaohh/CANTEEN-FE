@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,11 +29,11 @@ import { EmployeeComponent } from './employee/employee.component';
 import { TimekeepingComponent } from './employee/timekeeping/timekeeping.component';
 import { PayWageComponent } from './employee/pay-wage/pay-wage.component';
 import { EmployeeInfoComponent } from './employee/employee-info/employee-info.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsComponent } from './products/products.component';
 import { ProductInfoComponent } from './products/product-info/product-info.component';
 import { ImportProductComponent } from './products/import-product/import-product.component';
 import { SupplierComponent } from './products/supplier/supplier.component';
+import { DeliveryComponent } from './delivery/delivery.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { SupplierComponent } from './products/supplier/supplier.component';
     ProductInfoComponent,
     ImportProductComponent,
     SupplierComponent,
+    DeliveryComponent,
   ],
   imports: [
     BrowserModule,
