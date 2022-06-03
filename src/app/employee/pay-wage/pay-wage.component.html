@@ -1,0 +1,186 @@
+<div class="row m-0 mt-2">
+  <div class="col-6">
+    <form>
+      <div class="row mr-0">
+        <div class="col-md-2 mb-3">
+          <label for="id">ID</label>
+          <input type="text" class="form-control" id="id" disabled />
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" disabled />
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="position">Position</label>
+          <input type="text" class="form-control" id="position" disabled />
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="salary">Salary</label>
+          <input type="text" class="form-control" id="salary" disabled />
+        </div>
+      </div>
+    </form>
+    <h2>List of Employee</h2>
+    <table class="table table-hover table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Sex</th>
+          <th scope="col">Birth Date</th>
+          <th scope="col">Address</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Position</th>
+          <th scope="col">Salary</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>1</td>
+          <td>Tran Minh Hao</td>
+          <td>male</td>
+          <td>04-12-2000</td>
+          <td>Binh Dinh</td>
+          <td>0839518880</td>
+          <td>Manager</td>
+          <td>150000</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>2</td>
+          <td>Tran Minh Hao</td>
+          <td>male</td>
+          <td>04-12-2000</td>
+          <td>Binh Dinh</td>
+          <td>0839518880</td>
+          <td>Manager</td>
+          <td>150000</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>3</td>
+          <td>Tran Minh Hao</td>
+          <td>male</td>
+          <td>04-12-2000</td>
+          <td>Binh Dinh</td>
+          <td>0839518880</td>
+          <td>Manager</td>
+          <td>150000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-6">
+    <div class="row mr-0">
+      <div class="col-md-2 mb-3">
+        <label for="from-date">From Date</label>
+        <div class="input-group">
+          <input
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            [(ngModel)]="model"
+            ngbDatepicker
+            #d="ngbDatepicker"
+          />
+          <button
+            class="btn btn-outline-secondary calendar"
+            (click)="d.toggle()"
+            type="button"
+          ></button>
+        </div>
+      </div>
+      <div class="col-md-2 mb-3">
+        <label for="to-date">To Date</label>
+        <div class="input-group">
+          <input
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            [(ngModel)]="model"
+            ngbDatepicker
+            #d="ngbDatepicker"
+          />
+          <button
+            class="btn btn-outline-secondary calendar"
+            (click)="d.toggle()"
+            type="button"
+          ></button>
+        </div>
+      </div>
+      <div class="col-md-2 mb-3">
+        <label for="shifts">Shifts</label>
+        <input type="text" class="form-control" id="shifts" disabled />
+      </div>
+      <div class="col-md-2 mb-3">
+        <label for="bonus-salary">Bonus Salary</label>
+        <input
+          type="text"
+          class="form-control"
+          id="bonus-salary"
+          placeholder="Bonus Salary"
+        />
+      </div>
+      <div class="col-md-2 mb-3">
+        <label for="total-salary">Total Salary</label>
+        <input type="text" class="form-control" id="total-salary" disabled />
+      </div>
+      <div class="col-md-2 mb-3 text-right mt-2">
+        <br />
+        <button type="button" class="btn btn-primary ml-2 d-inline-flex">
+          <mat-icon>check</mat-icon>
+          <span>&nbsp;Confirm</span>
+        </button>
+      </div>
+    </div>
+    <h2>History of Pay Wage</h2>
+    <table class="table table-hover table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">End Date</th>
+          <th scope="col">Shifts</th>
+          <th scope="col">Bonus Salary</th>
+          <th scope="col">Total Salary</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>1</td>
+          <td>Tran Minh Hao</td>
+          <td>04-12-2022</td>
+          <td>04-12-2022</td>
+          <td>1</td>
+          <td>0</td>
+          <td>150000</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>2</td>
+          <td>Tran Minh Hao</td>
+          <td>04-12-2022</td>
+          <td>05-12-2022</td>
+          <td>2</td>
+          <td>50000</td>
+          <td>350000</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>3</td>
+          <td>Tran Minh Hao</td>
+          <td>04-12-2022</td>
+          <td>06-12-2022</td>
+          <td>3</td>
+          <td>120000</td>
+          <td>570000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
