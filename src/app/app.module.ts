@@ -30,6 +30,9 @@ import { PayWageComponent } from './employee/pay-wage/pay-wage.component';
 import { EmployeeInfoComponent } from './employee/employee-info/employee-info.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsComponent } from './products/products.component';
+import { ProductInfoComponent } from './products/product-info/product-info.component';
+import { ImportProductComponent } from './products/import-product/import-product.component';
+import { SupplierComponent } from './products/supplier/supplier.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,9 @@ import { ProductsComponent } from './products/products.component';
     PayWageComponent,
     EmployeeInfoComponent,
     ProductsComponent,
+    ProductInfoComponent,
+    ImportProductComponent,
+    SupplierComponent,
   ],
   imports: [
     BrowserModule,
