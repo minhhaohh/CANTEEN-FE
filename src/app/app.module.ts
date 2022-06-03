@@ -34,6 +34,7 @@ import { ProductInfoComponent } from './products/product-info/product-info.compo
 import { ImportProductComponent } from './products/import-product/import-product.component';
 import { SupplierComponent } from './products/supplier/supplier.component';
 import { DeliveryComponent } from './delivery/delivery.component';
+import { ReportComponent } from './report/report.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { DeliveryComponent } from './delivery/delivery.component';
     ImportProductComponent,
     SupplierComponent,
     DeliveryComponent,
+    ReportComponent,
   ],
   imports: [
     BrowserModule,
