@@ -24,3 +24,9 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.divChart {
+  display: block;
+  width: 400px;
+  height: 400px;
+}

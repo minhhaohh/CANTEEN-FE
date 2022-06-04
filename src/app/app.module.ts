@@ -26,9 +26,9 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { EmployeeInfoComponent } from './employee/employee-info/employee-info.component';
 import { TimekeepingComponent } from './employee/timekeeping/timekeeping.component';
 import { PayWageComponent } from './employee/pay-wage/pay-wage.component';
-import { EmployeeInfoComponent } from './employee/employee-info/employee-info.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductInfoComponent } from './products/product-info/product-info.component';
 import { ImportProductComponent } from './products/import-product/import-product.component';
@@ -44,9 +44,9 @@ import { ReportComponent } from './report/report.component';
     HomeComponent,
     DashboardComponent,
     EmployeeComponent,
+    EmployeeInfoComponent,
     TimekeepingComponent,
     PayWageComponent,
-    EmployeeInfoComponent,
     ProductsComponent,
     ProductInfoComponent,
     ImportProductComponent,
