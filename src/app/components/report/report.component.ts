@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Chart } from 'chart.js';
 
 @Component({
@@ -8,11 +8,12 @@ import { Chart } from 'chart.js';
 })
 export class ReportComponent implements OnInit {
   model: any;
+  @ViewChild('myChart', { static: true }) elemento: ElementRef;
 
   constructor() {}
 
   ngOnInit(): void {
-    const myChart = new Chart('myChart', {
+    const myChart = new Chart(this.elemento.nativeElement, {
       type: 'bar',
       data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],

@@ -10,6 +10,7 @@ export class HomeComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    console.log('a');
     const myChart = new Chart('myChart', {
       type: 'bar',
       data: {

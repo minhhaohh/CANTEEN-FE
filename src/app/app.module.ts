@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,20 +22,20 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 
-import { HeaderComponent } from './header/header.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
-import { HomeComponent } from './home/home.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { EmployeeComponent } from './employee/employee.component';
-import { EmployeeInfoComponent } from './employee/employee-info/employee-info.component';
-import { TimekeepingComponent } from './employee/timekeeping/timekeeping.component';
-import { PayWageComponent } from './employee/pay-wage/pay-wage.component';
-import { ProductsComponent } from './products/products.component';
-import { ProductInfoComponent } from './products/product-info/product-info.component';
-import { ImportProductComponent } from './products/import-product/import-product.component';
-import { SupplierComponent } from './products/supplier/supplier.component';
-import { DeliveryComponent } from './delivery/delivery.component';
-import { ReportComponent } from './report/report.component';
+import { HeaderComponent } from './components/header/header.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { HomeComponent } from './components/home/home.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { EmployeeComponent } from './components/employee/employee.component';
+import { EmployeeInfoComponent } from './components/employee/employee-info/employee-info.component';
+import { TimekeepingComponent } from './components/employee/timekeeping/timekeeping.component';
+import { PayWageComponent } from './components/employee/pay-wage/pay-wage.component';
+import { ProductsComponent } from './components/products/products.component';
+import { ProductInfoComponent } from './components/products/product-info/product-info.component';
+import { ImportProductComponent } from './components/products/import-product/import-product.component';
+import { SupplierComponent } from './components/products/supplier/supplier.component';
+import { DeliveryComponent } from './components/delivery/delivery.component';
+import { ReportComponent } from './components/report/report.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ReportComponent } from './report/report.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     FormsModule,
     MatToolbarModule,
     MatSidenavModule,
