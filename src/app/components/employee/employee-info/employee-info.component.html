@@ -4,7 +4,13 @@
       <div class="row mr-0 mt-2">
         <div class="col-md-2 mb-3">
           <label for="id">ID</label>
-          <input type="text" class="form-control" id="id" disabled />
+          <input
+            type="text"
+            class="form-control"
+            id="id"
+            [value]="myEmployee.empId"
+            disabled
+          />
         </div>
         <div class="col-md-2 mb-3">
           <label for="name">Name</label>
@@ -12,7 +18,7 @@
             type="text"
             class="form-control"
             id="name"
-            placeholder="Name"
+            [value]="myEmployee.empName"
             required
           />
         </div>
@@ -25,9 +31,9 @@
                 id="male"
                 name="sex"
                 class="custom-control-input"
-                checked
+                [checked]="myEmployee.sex == 'male'"
               />
-              <label class="custom-control-label" for="male">Male</label>
+              <label class="custom-control-label" for="male">male</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
               <input
@@ -35,8 +41,9 @@
                 id="female"
                 name="sex"
                 class="custom-control-input"
+                [checked]="myEmployee.sex == 'female'"
               />
-              <label class="custom-control-label" for="female">Female</label>
+              <label class="custom-control-label" for="female">female</label>
             </div>
           </div>
         </div>
@@ -45,11 +52,10 @@
           <div class="input-group">
             <input
               class="form-control"
-              placeholder="yyyy-mm-dd"
-              name="dp"
-              [(ngModel)]="model"
+              name="birthdate"
               ngbDatepicker
               #d="ngbDatepicker"
+              [value]="myEmployee.birthdate"
             />
             <button
               class="btn btn-outline-secondary calendar"
@@ -66,17 +72,17 @@
             type="text"
             class="form-control"
             id="address"
-            placeholder="Address"
+            [value]="myEmployee.address"
             required
           />
         </div>
         <div class="col-md-2 mb-3">
-          <label for="phone-number">Phone Number</label>
+          <label for="phone">Phone</label>
           <input
             type="text"
             class="form-control"
-            id="phone-number"
-            placeholder="Phone Number"
+            id="phone"
+            [value]="myEmployee.phone"
             required
           />
         </div>
@@ -86,16 +92,31 @@
             type="text"
             class="form-control"
             id="email"
-            placeholder="Email"
+            [value]="myEmployee.email"
             required
           />
         </div>
         <div class="col-md-2 mb-3">
           <label for="position">Position</label>
           <select class="custom-select">
-            <option selected value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option
+              [selected]="myEmployee.position == 'manager'"
+              value="Manager"
+            >
+              Manager
+            </option>
+            <option
+              [selected]="myEmployee.position == 'salesman'"
+              value="Salesman"
+            >
+              Salesman
+            </option>
+            <option
+              [selected]="myEmployee.position == 'deliver'"
+              value="Deliver"
+            >
+              Deliver
+            </option>
           </select>
         </div>
         <div class="col-md-2 mb-3">
@@ -104,7 +125,7 @@
             type="text"
             class="form-control"
             id="salary"
-            placeholder="Salary"
+            [value]="myEmployee.salary"
             required
           />
         </div>
@@ -118,7 +139,11 @@
           </div>
         </div>
         <div class="col-md-12 mb-3 text-right">
-          <button type="button" class="btn btn-primary ml-2 d-inline-flex">
+          <button
+            type="button"
+            class="btn btn-primary ml-2 d-inline-flex"
+            (click)="createEmployee()"
+          >
             <mat-icon>add</mat-icon>
             <span>&nbsp;Create</span>
           </button>
@@ -138,7 +163,7 @@
       </div>
     </form>
     <h2>List of Employee</h2>
-    <div class="row mr-0 mt-2">
+    <!-- <div class="row mr-0 mt-2">
       <div class="col-md-2 mb-3">
         <input type="text" class="form-control" id="name" placeholder="Name" />
       </div>
@@ -182,69 +207,77 @@
         </select>
       </div>
       <div class="col-md-1 mb-3 text-right">
-        <button type="button" class="btn btn-primary ml-2 d-inline-flex">
+        <button
+          type="button"
+          class="btn btn-primary ml-2 d-inline-flex"
+          (click)="getAllEmployees()"
+        >
           <mat-icon>search</mat-icon>
           <span>&nbsp;Search</span>
         </button>
       </div>
-    </div>
-    <table class="table table-hover table-bordered">
-      <thead class="">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Sex</th>
-          <th scope="col">Birth Date</th>
-          <th scope="col">Address</th>
-          <th scope="col">Phone Number</th>
-          <th scope="col">Email</th>
-          <th scope="col">Position</th>
-          <th scope="col">Salary</th>
-          <th scope="col">Image</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>1</td>
-          <td>Tran Minh Hao</td>
-          <td>male</td>
-          <td>04-12-2000</td>
-          <td>Binh Dinh</td>
-          <td>0839518880</td>
-          <td>minhhao.hh@gmail.com</td>
-          <td>Manager</td>
-          <td>150000</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>2</td>
-          <td>Tran Minh Hao</td>
-          <td>male</td>
-          <td>04-12-2000</td>
-          <td>Binh Dinh</td>
-          <td>0839518880</td>
-          <td>minhhao.hh@gmail.com</td>
-          <td>Manager</td>
-          <td>150000</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>3</td>
-          <td>Tran Minh Hao</td>
-          <td>male</td>
-          <td>04-12-2000</td>
-          <td>Binh Dinh</td>
-          <td>0839518880</td>
-          <td>minhhao.hh@gmail.com</td>
-          <td>Manager</td>
-          <td>150000</td>
-          <td></td>
-        </tr>
-      </tbody>
+    </div> -->
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="empId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.empId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="empName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.empName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="sex">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sex</th>
+        <td mat-cell *matCellDef="let element">{{ element.sex }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="birthdate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Birthdate</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.birthdate | date }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+        <td mat-cell *matCellDef="let element">{{ element.address }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+        <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Position</th>
+        <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="salary">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Salary</th>
+        <td mat-cell *matCellDef="let element">{{ element.salary }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Image</th>
+        <td mat-cell *matCellDef="let element">{{ element.image }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (click)="selectEmployee(row)"
+      ></tr>
     </table>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 30, 40, 50]">
+    </mat-paginator>
   </div>
 </div>

@@ -21,6 +21,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { HeaderComponent } from './components/header/header.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -61,6 +64,7 @@ import { ReportComponent } from './components/report/report.component';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    NgbModule,
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
@@ -74,7 +78,9 @@ import { ReportComponent } from './components/report/report.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
-    NgbModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

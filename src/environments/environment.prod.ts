@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlAddress: 'http://localhost:44363',
+  urlAddress: 'http://utc2canteen.com',
 };
