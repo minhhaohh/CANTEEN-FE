@@ -6,14 +6,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { EmployeeInfoComponent } from './employee-info/employee-info.component';
 import { TimekeepingComponent } from './timekeeping/timekeeping.component';
-import { PayWageComponent } from './pay-wage/pay-wage.component';
+import { PaySalaryComponent } from './pay-salary/pay-salary.component';
 
 @NgModule({
   declarations: [
     EmployeeComponent,
     EmployeeInfoComponent,
     TimekeepingComponent,
-    PayWageComponent,
+    PaySalaryComponent,
   ],
   imports: [BrowserModule, BrowserAnimationsModule],
   providers: [],

@@ -32,7 +32,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { EmployeeInfoComponent } from './components/employee/employee-info/employee-info.component';
 import { TimekeepingComponent } from './components/employee/timekeeping/timekeeping.component';
-import { PayWageComponent } from './components/employee/pay-wage/pay-wage.component';
+import { PaySalaryComponent } from './components/employee/pay-salary/pay-salary.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductInfoComponent } from './components/products/product-info/product-info.component';
 import { ImportProductComponent } from './components/products/import-product/import-product.component';
@@ -50,7 +50,7 @@ import { ReportComponent } from './components/report/report.component';
     EmployeeComponent,
     EmployeeInfoComponent,
     TimekeepingComponent,
-    PayWageComponent,
+    PaySalaryComponent,
     ProductsComponent,
     ProductInfoComponent,
     ImportProductComponent,
