@@ -6,7 +6,7 @@ export class Employee {
   address: string = null;
   phone: string = null;
   email: string = null;
-  position: string = null;
+  position: string = 'manager';
   salary: number = null;
   image: string = null;
 }
