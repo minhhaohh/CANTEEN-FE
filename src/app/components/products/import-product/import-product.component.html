@@ -1,79 +1,94 @@
 <div class="row m-0 mt-2">
   <div class="col-6">
-    <form>
-      <div class="row mr-0">
-        <div class="col-md-2 mb-3">
-          <label for="id">ID</label>
-          <input type="text" class="form-control" id="id" disabled />
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="name-food">Name Food</label>
-          <input type="text" class="form-control" id="name" disabled />
-        </div>
-        <div class="col-md-3 mb-3">
-          <label for="amount">Amount</label>
-          <input type="text" class="form-control" id="amount" disabled />
-        </div>
-        <div class="col-md-3 mb-3">
-          <label for="unit">Unit</label>
-          <input type="text" class="form-control" id="unit" disabled />
-        </div>
+    <div class="row mr-0">
+      <div class="col-md-2 mb-3">
+        <label for="id">ID</label>
+        <input
+          type="text"
+          class="form-control"
+          id="id"
+          [(ngModel)]="myProduct.proId"
+          disabled
+        />
       </div>
-    </form>
+      <div class="col-md-4 mb-3">
+        <label for="name-food">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="myProduct.proName"
+          disabled
+        />
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="amount">Total Qty</label>
+        <input
+          type="text"
+          class="form-control"
+          id="amount"
+          [(ngModel)]="myProduct.totalQty"
+          disabled
+        />
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="unit">Unit</label>
+        <input
+          type="text"
+          class="form-control"
+          id="unit"
+          [(ngModel)]="myProduct.unit"
+          disabled
+        />
+      </div>
+    </div>
     <h2>List of Product</h2>
-    <table class="table table-hover table-bordered">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Price</th>
-          <th scope="col">Amount</th>
-          <th scope="col">Unit</th>
-          <th scope="col">Type Food</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>1</td>
-          <td>Bánh tráng trộn</td>
-          <td>15000</td>
-          <td>100</td>
-          <td>Bịch</td>
-          <td>Đồ ăn vặt</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>2</td>
-          <td>Bánh mì</td>
-          <td>15000</td>
-          <td>40</td>
-          <td>Ổ</td>
-          <td>Đồ ăn sáng</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>3</td>
-          <td>Bánh canh</td>
-          <td>20000</td>
-          <td>20</td>
-          <td>Tô</td>
-          <td>Đồ ăn sáng</td>
-        </tr>
-      </tbody>
+    <table mat-table [dataSource]="dataSourceProduct" matSort>
+      <ng-container matColumnDef="proId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.proId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="proName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.proName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+        <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalQty">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Qty</th>
+        <td mat-cell *matCellDef="let element">{{ element.totalQty }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="unit">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Unit</th>
+        <td mat-cell *matCellDef="let element">{{ element.unit }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+        <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsProduct"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumnsProduct"
+        (click)="selectProduct(row)"
+      ></tr>
     </table>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 30, 40, 50]">
+    </mat-paginator>
   </div>
   <div class="col-6">
     <div class="row mr-0">
       <div class="col-md-4 mb-3">
         <label for="import-quantity">Import Quantity</label>
-        <input
-          type="text"
-          class="form-control"
-          id="import-quantity"
-          placeholder="Import Quantity"
-        />
+        <input type="text" class="form-control" id="import-quantity" />
       </div>
       <div class="col-md-4 mb-3">
         <label for="supplier">Supplier</label>
@@ -92,47 +107,46 @@
       </div>
     </div>
     <h2>History of Import Product</h2>
-    <table class="table table-hover table-bordered">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">ID</th>
-          <th scope="col">Name Food</th>
-          <th scope="col">Import Date</th>
-          <th scope="col">Import Quantity</th>
-          <th scope="col">Unit</th>
-          <th scope="col">Supplier</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>1</td>
-          <td>Bánh tráng trộn</td>
-          <td>04-12-2022</td>
-          <td>10</td>
-          <td>Bịch</td>
-          <td>Nike</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>2</td>
-          <td>Bánh canh</td>
-          <td>04-12-2022</td>
-          <td>13</td>
-          <td>Tô</td>
-          <td>Nike</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>3</td>
-          <td>Bánh mì</td>
-          <td>04-12-2022</td>
-          <td>17</td>
-          <td>Ổ</td>
-          <td>Nike</td>
-        </tr>
-      </tbody>
+    <table mat-table [dataSource]="dataSourceImportProduct" matSort>
+      <ng-container matColumnDef="proId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.proId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="proName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.proName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="importQty">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Import Qty</th>
+        <td mat-cell *matCellDef="let element">{{ element.importQty }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="importDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Import Date</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.importDate | date }}
+        </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="unit">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Unit</th>
+        <td mat-cell *matCellDef="let element">{{ element.unit }}</td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="supName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Supplier</th>
+        <td mat-cell *matCellDef="let element">{{ element.supName }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsImportProduct"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumnsImportProduct"
+      ></tr>
     </table>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 30, 40, 50]">
+    </mat-paginator>
   </div>
 </div>
