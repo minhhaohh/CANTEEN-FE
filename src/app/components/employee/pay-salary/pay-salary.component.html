@@ -1,76 +1,95 @@
 <div class="row m-0 mt-2">
   <div class="col-6">
-    <form>
-      <div class="row mr-0">
-        <div class="col-md-2 mb-3">
-          <label for="id">ID</label>
-          <input type="text" class="form-control" id="id" disabled />
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" disabled />
-        </div>
-        <div class="col-md-3 mb-3">
-          <label for="position">Position</label>
-          <input type="text" class="form-control" id="position" disabled />
-        </div>
-        <div class="col-md-3 mb-3">
-          <label for="salary">Salary</label>
-          <input type="text" class="form-control" id="salary" disabled />
-        </div>
+    <div class="row mr-0">
+      <div class="col-md-2 mb-3">
+        <label for="id">ID</label>
+        <input
+          type="text"
+          class="form-control"
+          id="id"
+          [(ngModel)]="myEmployee.empId"
+          disabled
+        />
       </div>
-    </form>
+      <div class="col-md-4 mb-3">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="myEmployee.empName"
+          disabled
+        />
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="position">Position</label>
+        <input
+          type="text"
+          class="form-control"
+          id="position"
+          [(ngModel)]="myEmployee.position"
+          disabled
+        />
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="salary">Salary</label>
+        <input
+          type="text"
+          class="form-control"
+          id="salary"
+          [(ngModel)]="myEmployee.salary"
+          disabled
+        />
+      </div>
+    </div>
     <h2>List of Employee</h2>
-    <table class="table table-hover table-bordered">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Sex</th>
-          <th scope="col">Birth Date</th>
-          <th scope="col">Address</th>
-          <th scope="col">Phone Number</th>
-          <th scope="col">Position</th>
-          <th scope="col">Salary</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>1</td>
-          <td>Tran Minh Hao</td>
-          <td>male</td>
-          <td>04-12-2000</td>
-          <td>Binh Dinh</td>
-          <td>0839518880</td>
-          <td>Manager</td>
-          <td>150000</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>2</td>
-          <td>Tran Minh Hao</td>
-          <td>male</td>
-          <td>04-12-2000</td>
-          <td>Binh Dinh</td>
-          <td>0839518880</td>
-          <td>Manager</td>
-          <td>150000</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>3</td>
-          <td>Tran Minh Hao</td>
-          <td>male</td>
-          <td>04-12-2000</td>
-          <td>Binh Dinh</td>
-          <td>0839518880</td>
-          <td>Manager</td>
-          <td>150000</td>
-        </tr>
-      </tbody>
+    <table mat-table [dataSource]="dataSourceEmployee" matSort>
+      <ng-container matColumnDef="empId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.empId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="empName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.empName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="sex">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sex</th>
+        <td mat-cell *matCellDef="let element">{{ element.sex }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="birthdate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Birthdate</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.birthdate | date }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+        <td mat-cell *matCellDef="let element">{{ element.address }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Position</th>
+        <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="salary">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Salary</th>
+        <td mat-cell *matCellDef="let element">{{ element.salary }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsEmployee"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumnsEmployee"
+        (click)="selectEmployee(row)"
+      ></tr>
     </table>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 30, 40, 50]">
+    </mat-paginator>
   </div>
   <div class="col-6">
     <div class="row mr-0">
@@ -79,17 +98,18 @@
         <div class="input-group">
           <input
             class="form-control"
-            placeholder="yyyy-mm-dd"
             name="dp"
-            [(ngModel)]="model"
             ngbDatepicker
             #d="ngbDatepicker"
+            [(ngModel)]="datepickerFrom"
           />
           <button
             class="btn btn-outline-secondary calendar"
             (click)="d.toggle()"
             type="button"
-          ></button>
+          >
+            <mat-icon class="calendar-icon">calendar_today</mat-icon>
+          </button>
         </div>
       </div>
       <div class="col-md-2 mb-3">
@@ -97,22 +117,29 @@
         <div class="input-group">
           <input
             class="form-control"
-            placeholder="yyyy-mm-dd"
             name="dp"
-            [(ngModel)]="model"
             ngbDatepicker
             #d="ngbDatepicker"
+            [(ngModel)]="datepickerTo"
           />
           <button
             class="btn btn-outline-secondary calendar"
             (click)="d.toggle()"
             type="button"
-          ></button>
+          >
+            <mat-icon class="calendar-icon">calendar_today</mat-icon>
+          </button>
         </div>
       </div>
       <div class="col-md-2 mb-3">
         <label for="shifts">Shifts</label>
-        <input type="text" class="form-control" id="shifts" disabled />
+        <input
+          type="text"
+          class="form-control"
+          id="shifts"
+          [(ngModel)]="myPaySalary.shiftNumber"
+          disabled
+        />
       </div>
       <div class="col-md-2 mb-3">
         <label for="bonus-salary">Bonus Salary</label>
@@ -120,12 +147,18 @@
           type="text"
           class="form-control"
           id="bonus-salary"
-          placeholder="Bonus Salary"
+          [(ngModel)]="myPaySalary.bonusSalary"
         />
       </div>
       <div class="col-md-2 mb-3">
         <label for="total-salary">Total Salary</label>
-        <input type="text" class="form-control" id="total-salary" disabled />
+        <input
+          type="text"
+          class="form-control"
+          id="total-salary"
+          [(ngModel)]="myPaySalary.totalSalary"
+          disabled
+        />
       </div>
       <div class="col-md-2 mb-3 text-right mt-2">
         <br />
@@ -135,52 +168,51 @@
         </button>
       </div>
     </div>
-    <h2>History of Pay Wage</h2>
-    <table class="table table-hover table-bordered">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Start Date</th>
-          <th scope="col">End Date</th>
-          <th scope="col">Shifts</th>
-          <th scope="col">Bonus Salary</th>
-          <th scope="col">Total Salary</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>1</td>
-          <td>Tran Minh Hao</td>
-          <td>04-12-2022</td>
-          <td>04-12-2022</td>
-          <td>1</td>
-          <td>0</td>
-          <td>150000</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>2</td>
-          <td>Tran Minh Hao</td>
-          <td>04-12-2022</td>
-          <td>05-12-2022</td>
-          <td>2</td>
-          <td>50000</td>
-          <td>350000</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>3</td>
-          <td>Tran Minh Hao</td>
-          <td>04-12-2022</td>
-          <td>06-12-2022</td>
-          <td>3</td>
-          <td>120000</td>
-          <td>570000</td>
-        </tr>
-      </tbody>
+    <h2>History of Pay Salary</h2>
+    <table mat-table [dataSource]="dataSourcePaySalary" matSort>
+      <ng-container matColumnDef="empId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.empId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="empName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.empName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="fromDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>From Date</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.fromDate | date }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="toDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>To Date</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.toDate | date }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="shiftNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Shift Number</th>
+        <td mat-cell *matCellDef="let element">{{ element.shiftNumber }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="bonusSalary">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Bonus</th>
+        <td mat-cell *matCellDef="let element">{{ element.bonusSalary }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalSalary">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Total</th>
+        <td mat-cell *matCellDef="let element">{{ element.totalSalary }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsPaySalary"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsPaySalary"></tr>
     </table>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 30, 40, 50]">
+    </mat-paginator>
   </div>
 </div>

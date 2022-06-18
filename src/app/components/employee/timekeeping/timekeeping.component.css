@@ -12,3 +12,9 @@ th.mat-header-cell {
   background-color: #17a2b8;
   font-size: 1rem;
 }
+
+.calendar-icon {
+  width: 16px;
+  display: flex;
+  justify-content: center;
+}
