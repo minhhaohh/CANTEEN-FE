@@ -1,88 +1,111 @@
 <div class="row m-0">
   <div class="col-12">
-    <form>
-      <div class="row mr-0 mt-2">
-        <div class="col-md-1 mb-3">
-          <label for="id">ID</label>
-          <input type="text" class="form-control" id="id" disabled />
-        </div>
-        <div class="col-md-2 mb-3">
-          <label for="name">Food Name</label>
+    <div class="row mr-0 mt-2">
+      <div class="col-md-1 mb-3">
+        <label for="id">ID</label>
+        <input
+          type="text"
+          class="form-control"
+          id="id"
+          [(ngModel)]="myProduct.proId"
+          disabled
+        />
+      </div>
+      <div class="col-md-2 mb-3">
+        <label for="name">Food Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="myProduct.proName"
+          required
+        />
+      </div>
+      <div class="col-md-1 mb-3">
+        <label for="price">Price</label>
+        <input
+          type="text"
+          class="form-control"
+          id="price"
+          [(ngModel)]="myProduct.price"
+          required
+        />
+      </div>
+      <div class="col-md-1 mb-3">
+        <label for="amount">Total Qty</label>
+        <input
+          type="text"
+          class="form-control"
+          id="amount"
+          [(ngModel)]="myProduct.totalQty"
+          required
+        />
+      </div>
+      <div class="col-md-2 mb-3">
+        <label for="">Unit</label>
+        <select class="custom-select" [(ngModel)]="myProduct.unit">
+          <option value="to">to</option>
+          <option value="o">o</option>
+          <option value="bich">bich</option>
+        </select>
+      </div>
+      <div class="col-md-2 mb-3">
+        <label for="type-food">Type</label>
+        <select class="custom-select" [(ngModel)]="myProduct.type">
+          <option value="breakfast">breakfast</option>
+          <option value="snack">snack</option>
+          <option value="drink">drink</option>
+        </select>
+      </div>
+      <div class="col-md-2 mb-3">
+        <label for="">Image</label>
+        <div class="custom-file">
           <input
-            type="text"
-            class="form-control"
-            id="name"
-            placeholder="Name"
-            required
+            type="file"
+            class="custom-file-input"
+            id="customFile"
+            [(ngModel)]="myProduct.image"
           />
-        </div>
-        <div class="col-md-1 mb-3">
-          <label for="price">Price</label>
-          <input
-            type="text"
-            class="form-control"
-            id="price"
-            placeholder="Price"
-            required
-          />
-        </div>
-        <div class="col-md-1 mb-3">
-          <label for="amount">Amount</label>
-          <input
-            type="text"
-            class="form-control"
-            id="amount"
-            placeholder="Amount"
-            required
-          />
-        </div>
-        <div class="col-md-2 mb-3">
-          <label for="">Unit</label>
-          <select class="custom-select">
-            <option selected value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-        <div class="col-md-2 mb-3">
-          <label for="type-food">Type Food</label>
-          <select class="custom-select">
-            <option selected value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
-        <div class="col-md-2 mb-3">
-          <label for="">Image</label>
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" id="customFile" />
-            <label class="custom-file-label" for="customFile"
-              >Choose file</label
-            >
-          </div>
-        </div>
-        <div class="col-md-12 mb-3 text-right">
-          <button type="button" class="btn btn-primary ml-2 d-inline-flex">
-            <mat-icon>add</mat-icon>
-            <span>&nbsp;Create</span>
-          </button>
-          <button type="button" class="btn btn-secondary ml-2 d-inline-flex">
-            <mat-icon>clear</mat-icon>
-            <span>&nbsp;Clear</span>
-          </button>
-          <button type="button" class="btn btn-success ml-2 d-inline-flex">
-            <mat-icon>update</mat-icon>
-            <span>&nbsp;Update</span>
-          </button>
-          <button type="button" class="btn btn-danger ml-2 d-inline-flex">
-            <mat-icon>delete</mat-icon>
-            <span>&nbsp;Delete</span>
-          </button>
+          <label class="custom-file-label" for="customFile">Choose file</label>
         </div>
       </div>
-    </form>
+      <div class="col-md-12 mb-3 text-right">
+        <button
+          type="button"
+          class="btn btn-primary ml-2 d-inline-flex"
+          (click)="createProduct()"
+        >
+          <mat-icon>add</mat-icon>
+          <span>&nbsp;Create</span>
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary ml-2 d-inline-flex"
+          (click)="clearForm()"
+        >
+          <mat-icon>clear</mat-icon>
+          <span>&nbsp;Clear</span>
+        </button>
+        <button
+          type="button"
+          class="btn btn-success ml-2 d-inline-flex"
+          (click)="updateProduct()"
+        >
+          <mat-icon>update</mat-icon>
+          <span>&nbsp;Update</span>
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger ml-2 d-inline-flex"
+          (click)="deleteProduct()"
+        >
+          <mat-icon>delete</mat-icon>
+          <span>&nbsp;Delete</span>
+        </button>
+      </div>
+    </div>
     <h2>List of Product</h2>
-    <div class="row mr-0 mt-2">
+    <!-- <div class="row mr-0 mt-2">
       <div class="col-md-2 mb-3">
         <input
           type="text"
@@ -121,52 +144,51 @@
           <span>&nbsp;Search</span>
         </button>
       </div>
-    </div>
-    <table class="table table-hover table-bordered">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Price</th>
-          <th scope="col">Amount</th>
-          <th scope="col">Unit</th>
-          <th scope="col">Type Food</th>
-          <th scope="col">Image</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>1</td>
-          <td>Bánh tráng trộn</td>
-          <td>15000</td>
-          <td>100</td>
-          <td>Bịch</td>
-          <td>Đồ ăn vặt</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>2</td>
-          <td>Bánh mì</td>
-          <td>15000</td>
-          <td>40</td>
-          <td>Ổ</td>
-          <td>Đồ ăn sáng</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>3</td>
-          <td>Bánh canh</td>
-          <td>20000</td>
-          <td>20</td>
-          <td>Tô</td>
-          <td>Đồ ăn sáng</td>
-          <td></td>
-        </tr>
-      </tbody>
+    </div> -->
+    <table mat-table [dataSource]="dataSourceProduct" matSort>
+      <ng-container matColumnDef="proId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.proId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="proName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.proName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+        <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalQty">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Qty</th>
+        <td mat-cell *matCellDef="let element">{{ element.totalQty }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="unit">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Unit</th>
+        <td mat-cell *matCellDef="let element">{{ element.unit }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+        <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Image</th>
+        <td mat-cell *matCellDef="let element">{{ element.image }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsProduct"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumnsProduct"
+        (click)="selectProduct(row)"
+      ></tr>
     </table>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 30, 40, 50]">
+    </mat-paginator>
   </div>
 </div>
