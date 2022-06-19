@@ -88,19 +88,31 @@
     <div class="row mr-0">
       <div class="col-md-4 mb-3">
         <label for="import-quantity">Import Quantity</label>
-        <input type="text" class="form-control" id="import-quantity" />
+        <input
+          type="text"
+          class="form-control"
+          id="import-quantity"
+          [(ngModel)]="myImportProduct.importQty"
+        />
       </div>
       <div class="col-md-4 mb-3">
         <label for="supplier">Supplier</label>
-        <select class="custom-select">
-          <option selected value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <select class="custom-select" [(ngModel)]="myImportProduct.supId">
+          <option
+            *ngFor="let supplier of suppliers"
+            value="{{ supplier.supId }}"
+          >
+            {{ supplier.supName }}
+          </option>
         </select>
       </div>
       <div class="col-md-2 mb-3 text-right mt-2">
         <br />
-        <button type="button" class="btn btn-primary ml-2 d-inline-flex">
+        <button
+          type="button"
+          class="btn btn-primary ml-2 d-inline-flex"
+          (click)="createImportProduct()"
+        >
           <mat-icon>check</mat-icon>
           <span>&nbsp;Confirm</span>
         </button>

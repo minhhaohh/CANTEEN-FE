@@ -6,8 +6,10 @@ import { MatPaginator } from '@angular/material/paginator';
 
 import { Product } from './../../../models/product.model';
 import { ImportProduct } from './../../../models/import-product.model';
+import { Supplier } from './../../../models/supplier.model';
 import { ProductRepositoryService } from './../../../shared/services/product-repository.service';
 import { ImportProductRepositoryService } from './../../../shared/services/import-product-repository.service';
+import { SupplierRepositoryService } from './../../../shared/services/supplier-repository.service';
 
 @Component({
   selector: 'app-import-product',
@@ -41,14 +43,18 @@ export class ImportProductComponent implements OnInit {
   myProduct = new Product();
   myImportProduct = new ImportProduct();
 
+  suppliers: Supplier[];
+
   constructor(
     private productRepo: ProductRepositoryService,
-    private importProductRepo: ImportProductRepositoryService
+    private importProductRepo: ImportProductRepositoryService,
+    private supplierRepo: SupplierRepositoryService
   ) {}
 
   ngOnInit(): void {
     this.getAllProducts();
     this.getAllImportProducts();
+    this.getAllSuppliers();
   }
 
   ngAfterViewInit(): void {
@@ -61,6 +67,13 @@ export class ImportProductComponent implements OnInit {
   getAllProducts() {
     this.productRepo.getAllProducts('api/product').subscribe((res: any) => {
       this.dataSourceProduct.data = res as Product[];
+    });
+  }
+
+  getAllSuppliers() {
+    this.supplierRepo.getAllSuppliers('api/supplier').subscribe((res: any) => {
+      this.suppliers = res as Supplier[];
+      console.log(this.suppliers);
     });
   }
 
@@ -79,4 +92,17 @@ export class ImportProductComponent implements OnInit {
         this.dataSourceImportProduct.data = res as ImportProduct[];
       });
   }
+
+  createImportProduct() {
+    this.myImportProduct.proId = this.myProduct.proId;
+    this.importProductRepo
+      .createImportProduct('api/import-product', this.myImportProduct)
+      .subscribe((res: any) => {
+        this.clearForm();
+        this.getAllImportProducts();
+        this.getAllProducts();
+      });
+  }
+
+  clearForm() {}
 }

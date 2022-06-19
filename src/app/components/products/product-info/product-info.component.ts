@@ -30,7 +30,7 @@ export class ProductInfoComponent implements OnInit, AfterViewInit {
 
   myProduct = new Product();
 
-  constructor(private repo: ProductRepositoryService) {}
+  constructor(private productRepo: ProductRepositoryService) {}
 
   ngOnInit(): void {
     this.getAllProducts();
@@ -42,13 +42,13 @@ export class ProductInfoComponent implements OnInit, AfterViewInit {
   }
 
   getAllProducts() {
-    this.repo.getAllProducts('api/product').subscribe((res: any) => {
+    this.productRepo.getAllProducts('api/product').subscribe((res: any) => {
       this.dataSourceProduct.data = res as Product[];
     });
   }
 
   selectProduct(selectedProduct) {
-    this.repo
+    this.productRepo
       .getProduct(`api/product/${selectedProduct.proId}`)
       .subscribe((res: any) => {
         this.myProduct = res as Product;
@@ -56,7 +56,7 @@ export class ProductInfoComponent implements OnInit, AfterViewInit {
   }
 
   createProduct() {
-    this.repo
+    this.productRepo
       .createProduct('api/product', this.myProduct)
       .subscribe((res: any) => {
         this.clearForm();
@@ -65,7 +65,7 @@ export class ProductInfoComponent implements OnInit, AfterViewInit {
   }
 
   updateProduct() {
-    this.repo
+    this.productRepo
       .updateProduct(`api/product/${this.myProduct.proId}`, this.myProduct)
       .subscribe((res: any) => {
         this.clearForm();
@@ -74,7 +74,7 @@ export class ProductInfoComponent implements OnInit, AfterViewInit {
   }
 
   deleteProduct() {
-    this.repo
+    this.productRepo
       .deleteProduct(`api/product/${this.myProduct.proId}`)
       .subscribe((res: any) => {
         console.log(res);
