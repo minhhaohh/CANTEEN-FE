@@ -39,6 +39,8 @@ import { ImportProductComponent } from './components/products/import-product/imp
 import { SupplierComponent } from './components/products/supplier/supplier.component';
 import { DeliveryComponent } from './components/delivery/delivery.component';
 import { ReportComponent } from './components/report/report.component';
+import { OrderReportComponent } from './components/report/order-report/order-report.component';
+import { ImportProductReportComponent } from './components/report/import-product-report/import-product-report.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { ReportComponent } from './components/report/report.component';
     SupplierComponent,
     DeliveryComponent,
     ReportComponent,
+    OrderReportComponent,
+    ImportProductReportComponent,
   ],
   imports: [
     BrowserModule,

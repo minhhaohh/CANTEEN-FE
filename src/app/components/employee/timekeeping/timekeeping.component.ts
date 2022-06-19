@@ -64,6 +64,8 @@ export class TimekeepingComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSourceEmployee.sort = this.sort;
     this.dataSourceEmployee.paginator = this.paginator;
+    this.dataSourceTimekeeping.sort = this.sort;
+    this.dataSourceTimekeeping.paginator = this.paginator;
   }
 
   getAllEmployees() {

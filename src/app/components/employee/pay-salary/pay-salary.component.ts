@@ -73,6 +73,8 @@ export class PaySalaryComponent implements OnInit {
   ngAfterViewInit(): void {
     this.dataSourceEmployee.sort = this.sort;
     this.dataSourceEmployee.paginator = this.paginator;
+    this.dataSourcePaySalary.sort = this.sort;
+    this.dataSourcePaySalary.paginator = this.paginator;
   }
 
   getAllEmployees() {

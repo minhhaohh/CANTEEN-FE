@@ -1,0 +1,102 @@
+<div class="row m-0 mt-2">
+  <div class="col-6">
+    <div class="row mr-0">
+      <div class="col-md-3 mb-3">
+        <label for="from-date">From Date</label>
+        <div class="input-group">
+          <input
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            [(ngModel)]="model"
+            ngbDatepicker
+            #d="ngbDatepicker"
+          />
+          <button
+            class="btn btn-outline-secondary calendar"
+            (click)="d.toggle()"
+            type="button"
+          ></button>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="to-date">To Date</label>
+        <div class="input-group">
+          <input
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            [(ngModel)]="model"
+            ngbDatepicker
+            #d="ngbDatepicker"
+          />
+          <button
+            class="btn btn-outline-secondary calendar"
+            (click)="d.toggle()"
+            type="button"
+          ></button>
+        </div>
+      </div>
+      <div class="col-md-2 mb-3 text-right mt-2">
+        <br />
+        <button type="button" class="btn btn-primary ml-2 d-inline-flex">
+          <mat-icon>search</mat-icon>
+          <span>&nbsp;Search</span>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-12 mb-3 text-right">
+      <button type="button" class="btn btn-success ml-2 d-inline-flex">
+        <mat-icon>excel</mat-icon>
+        <span>&nbsp;Excel</span>
+      </button>
+      <button type="button" class="btn btn-info ml-2 d-inline-flex">
+        <mat-icon>print</mat-icon>
+        <span>&nbsp;Print</span>
+      </button>
+    </div>
+    <h2>History of Import Product</h2>
+    <table mat-table [dataSource]="dataSourceImportProduct" matSort>
+      <ng-container matColumnDef="proId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.proId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="proName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.proName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="importQty">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Import Qty</th>
+        <td mat-cell *matCellDef="let element">{{ element.importQty }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="importDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Import Date</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.importDate | date }}
+        </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="unit">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Unit</th>
+        <td mat-cell *matCellDef="let element">{{ element.unit }}</td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="supName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Supplier</th>
+        <td mat-cell *matCellDef="let element">{{ element.supName }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsImportProduct"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumnsImportProduct"
+      ></tr>
+    </table>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 30, 40, 50]">
+    </mat-paginator>
+  </div>
+  <div class="col-6"></div>
+</div>
