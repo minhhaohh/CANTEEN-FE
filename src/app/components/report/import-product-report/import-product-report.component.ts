@@ -12,9 +12,7 @@ import { ImportProductRepositoryService } from './../../../shared/services/impor
   templateUrl: './import-product-report.component.html',
   styleUrls: ['./import-product-report.component.css'],
 })
-export class ImportProductReportComponent implements OnInit {
-  model: any;
-
+export class ImportProductReportComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

@@ -6,9 +6,7 @@
         <div class="input-group">
           <input
             class="form-control"
-            placeholder="yyyy-mm-dd"
             name="dp"
-            [(ngModel)]="model"
             ngbDatepicker
             #d="ngbDatepicker"
           />
@@ -24,9 +22,7 @@
         <div class="input-group">
           <input
             class="form-control"
-            placeholder="yyyy-mm-dd"
             name="dp"
-            [(ngModel)]="model"
             ngbDatepicker
             #d="ngbDatepicker"
           />
@@ -56,52 +52,39 @@
       </button>
     </div>
     <h2>History of Order</h2>
-    <table class="table table-hover table-bordered">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">ID</th>
-          <th scope="col">Created Date</th>
-          <th scope="col">Total Bill</th>
-          <th scope="col">Name</th>
-          <th scope="col">Phone Number</th>
-          <th scope="col">Email</th>
-          <th scope="col">Address</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>1</td>
-          <td>04-12-2022</td>
-          <td>30000</td>
-          <td>Minh Hao</td>
-          <td>0839518880</td>
-          <td>hao@gmail.com</td>
-          <td>101C2</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>2</td>
-          <td>04-12-2022</td>
-          <td>45000</td>
-          <td>Minh Hao</td>
-          <td>0839518880</td>
-          <td>hao@gmail.com</td>
-          <td>101C2</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>3</td>
-          <td>04-12-2022</td>
-          <td>30000</td>
-          <td>Minh Hao</td>
-          <td>0839518880</td>
-          <td>hao@gmail.com</td>
-          <td>101C2</td>
-        </tr>
-      </tbody>
+    <table mat-table [dataSource]="dataSourceOrder" matSort>
+      <ng-container matColumnDef="orderId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.orderId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Created Date</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.createdDate | date }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalPayment">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Payment</th>
+        <td mat-cell *matCellDef="let element">{{ element.totalPayment }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="isDelivery">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Delivery</th>
+        <td mat-cell *matCellDef="let element">{{ element.isDelivery }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+        <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsOrder"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsOrder"></tr>
     </table>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 30, 40, 50]">
+    </mat-paginator>
   </div>
   <div class="col-6">
     <div class="divChart">

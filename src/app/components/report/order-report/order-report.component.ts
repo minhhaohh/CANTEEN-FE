@@ -1,18 +1,61 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core';
 import { Chart } from 'chart.js';
+
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+
+import { Order } from './../../../models/order.model';
+import { OrderRepositoryService } from './../../../shared/services/order-repository.service';
 
 @Component({
   selector: 'app-order-report',
   templateUrl: './order-report.component.html',
   styleUrls: ['./order-report.component.css'],
 })
-export class OrderReportComponent implements OnInit {
-  model: any;
+export class OrderReportComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   @ViewChild('myChart', { static: true }) elemento: ElementRef;
 
-  constructor() {}
+  public dataSourceOrder = new MatTableDataSource<Order>();
+
+  public displayedColumnsOrder = [
+    'orderId',
+    'createdDate',
+    'totalPayment',
+    'isDelivery',
+    'status',
+  ];
+
+  myOrder = new Order();
+
+  constructor(private orderRepo: OrderRepositoryService) {}
 
   ngOnInit(): void {
+    this.createChart();
+    this.getAllOrders();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSourceOrder.sort = this.sort;
+    this.dataSourceOrder.paginator = this.paginator;
+  }
+
+  getAllOrders() {
+    this.orderRepo.getAllOrders('api/order').subscribe((res: any) => {
+      this.dataSourceOrder.data = res as Order[];
+    });
+  }
+
+  createChart() {
     const myChart = new Chart(this.elemento.nativeElement, {
       type: 'bar',
       data: {
