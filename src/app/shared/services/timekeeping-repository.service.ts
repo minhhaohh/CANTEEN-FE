@@ -18,6 +18,12 @@ export class TimekeepingRepositoryService {
     );
   };
 
+  public getTimekeepingNumberFromDateToDate = (route: string) => {
+    return this.http.get<Timekeeping>(
+      this.createCompleteRoute(route, this.envUrl.urlAddress)
+    );
+  };
+
   public createTimekeeping = (route: string, timekeeping: Timekeeping) => {
     return this.http.post<Timekeeping>(
       this.createCompleteRoute(route, this.envUrl.urlAddress),

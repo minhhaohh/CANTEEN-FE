@@ -62,7 +62,8 @@ export class PaySalaryComponent implements OnInit {
 
   constructor(
     private employeeRepo: EmployeeRepositoryService,
-    private paySalaryRepo: PaySalaryRepositoryService
+    private paySalaryRepo: PaySalaryRepositoryService,
+    private timekeepingRepo: TimekeepingRepositoryService
   ) {}
 
   ngOnInit(): void {
@@ -88,6 +89,7 @@ export class PaySalaryComponent implements OnInit {
       .getEmployee(`api/employee/${selectedEmployee.empId}`)
       .subscribe((res: any) => {
         this.myEmployee = res as Employee;
+        this.getTotalSalary();
       });
   }
 
@@ -99,7 +101,7 @@ export class PaySalaryComponent implements OnInit {
       });
   }
 
-  createTimekeeping() {
+  createPaySalary() {
     this.myPaySalary.empId = this.myEmployee.empId;
     this.myPaySalary.fromDate = this.formatDate.ngbDateStructToDate(
       this.datepickerFrom
@@ -113,5 +115,29 @@ export class PaySalaryComponent implements OnInit {
         console.log(res);
         this.getAllPaySalarys();
       });
+  }
+
+  getShiftNumber() {
+    var fromDate = `${this.datepickerFrom.year}-${this.datepickerFrom.month}-${this.datepickerFrom.day}`;
+    var toDate = `${this.datepickerTo.year}-${this.datepickerTo.month}-${this.datepickerTo.day}`;
+    this.timekeepingRepo
+      .getTimekeepingNumberFromDateToDate(
+        `api/time-keeping/${this.myEmployee.empId}/${fromDate}/${toDate}`
+      )
+      .subscribe((res: any) => {
+        this.myPaySalary.shiftNumber = res as number;
+        this.getTotalSalary();
+      });
+  }
+
+  getTotalSalary() {
+    this.myPaySalary.totalSalary =
+      this.myEmployee.salary * this.myPaySalary.shiftNumber +
+      this.myPaySalary.bonusSalary;
+  }
+
+  addBonusSalary() {
+    this.myPaySalary.bonusSalary = this.myPaySalary.bonusSalary * 1;
+    this.getTotalSalary();
   }
 }
