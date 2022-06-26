@@ -118,4 +118,13 @@ export class EmployeeInfoComponent implements OnInit, AfterViewInit {
       this.myEmployee.birthdate
     );
   }
+
+  chooseFileImage(event) {
+    var path = './../../../assets/images/employees/';
+    var fileName = event.target.files[0].name;
+    path += fileName;
+    console.log(path);
+    this.myEmployee.image = path;
+    console.log(path);
+  }
 }

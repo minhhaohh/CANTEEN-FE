@@ -92,4 +92,25 @@ export class ProductInfoComponent implements OnInit, AfterViewInit {
     this.myProduct.type = null;
     this.myProduct.image = null;
   }
+
+  localUrl: any[];
+  showPreviewImage(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.localUrl = event.target.result;
+        console.log(this.localUrl);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+      console.log(reader);
+    }
+  }
+
+  chooseFileImage(event) {
+    var path = '../../assets/images/products/';
+    var fileName = event.target.files[0].name;
+    path += fileName;
+    console.log(path);
+    this.myProduct.image = path;
+  }
 }

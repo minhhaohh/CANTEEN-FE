@@ -118,13 +118,18 @@ export class PaySalaryComponent implements OnInit {
   }
 
   getShiftNumber() {
-    var fromDate = `${this.datepickerFrom.year}-${this.datepickerFrom.month}-${this.datepickerFrom.day}`;
-    var toDate = `${this.datepickerTo.year}-${this.datepickerTo.month}-${this.datepickerTo.day}`;
+    var fromDate = this.formatDate.ngbDateStructToDateString(
+      this.datepickerFrom
+    );
+    var toDate = this.formatDate.ngbDateStructToDateString(this.datepickerTo);
+    // var fromDate = `${this.datepickerFrom.year}-${this.datepickerFrom.month}-${this.datepickerFrom.day}`;
+    // var toDate = `${this.datepickerTo.year}-${this.datepickerTo.month}-${this.datepickerTo.day}`;
     this.timekeepingRepo
       .getTimekeepingNumberFromDateToDate(
         `api/time-keeping/${this.myEmployee.empId}/${fromDate}/${toDate}`
       )
       .subscribe((res: any) => {
+        console.log(fromDate, toDate);
         this.myPaySalary.shiftNumber = res as number;
         this.getTotalSalary();
       });

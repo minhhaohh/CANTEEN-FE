@@ -18,6 +18,12 @@ export class OrderRepositoryService {
     );
   };
 
+  public getOrdersBy = (route: string) => {
+    return this.http.get<Order[]>(
+      this.createCompleteRoute(route, this.envUrl.urlAddress)
+    );
+  };
+
   public getOrder = (route: string) => {
     return this.http.get<Order>(
       this.createCompleteRoute(route, this.envUrl.urlAddress)
@@ -26,6 +32,14 @@ export class OrderRepositoryService {
 
   public createOrder = (route: string, order: Order) => {
     return this.http.post<Order>(
+      this.createCompleteRoute(route, this.envUrl.urlAddress),
+      order,
+      this.generateHeaders()
+    );
+  };
+
+  public updateOrder = (route: string, order: Order) => {
+    return this.http.put(
       this.createCompleteRoute(route, this.envUrl.urlAddress),
       order,
       this.generateHeaders()

@@ -1,0 +1,95 @@
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Shop</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="row">
+      <div class="col-md-12 mb-3 text-right">
+        <button
+          type="button"
+          class="btn ml-2 d-inline-flex"
+          (click)="selectType('')"
+          [ngClass]="type == '' ? 'btn-primary' : 'btn-secondary'"
+        >
+          <mat-icon>fastfood</mat-icon>
+          <span>&nbsp;All</span>
+        </button>
+        <button
+          type="button"
+          class="btn ml-2 d-inline-flex"
+          (click)="selectType('breakfast')"
+          [ngClass]="type == 'breakfast' ? 'btn-primary' : 'btn-secondary'"
+        >
+          <mat-icon>beach_access</mat-icon>
+          <span>&nbsp;Breakfast</span>
+        </button>
+        <button
+          type="button"
+          class="btn ml-2 d-inline-flex"
+          (click)="selectType('drink')"
+          [ngClass]="type == 'drink' ? 'btn-primary' : 'btn-secondary'"
+        >
+          <mat-icon>local_drink</mat-icon>
+          <span>&nbsp;Drink</span>
+        </button>
+        <button
+          type="button"
+          class="btn ml-2 d-inline-flex"
+          (click)="selectType('snack')"
+          [ngClass]="type == 'snack' ? 'btn-primary' : 'btn-secondary'"
+        >
+          <mat-icon>child_care</mat-icon>
+          <span>&nbsp;Snack</span>
+        </button>
+        <button
+          type="button"
+          class="btn ml-2 d-inline-flex"
+          (click)="selectType('other')"
+          [ngClass]="type == 'other' ? 'btn-primary' : 'btn-secondary'"
+        >
+          <mat-icon>add</mat-icon>
+          <span>&nbsp;Other</span>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div
+        class="col-xl-2 col-lg-3 col-md-4 p-2"
+        *ngFor="let product of products"
+      >
+        <div class="product">
+          <img class="product-img" src="{{ product.image }}" alt="" />
+          <div class="wrap-product-price">
+            <span>{{ product.price }}đ</span>
+            <span class="product-star">*****</span>
+          </div>
+          <div class="wrap-product-name">
+            <a
+              class="product-name"
+              routerLink="/user/product-detail/{{ product.proId }}"
+              >{{ product.proName }}</a
+            >
+            <button
+              class="btn-add"
+              title="Add to cart"
+              (click)="addToCart(product)"
+            >
+              <mat-icon>shopping_cart</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-xl-2 col-lg-3 col-md-4 p-2">
+        <div class="product">
+          <img class="product-img" src="../../assets/utc2.png" alt="" />
+          <div class="wrap-product-price">
+            <span>10.000đ</span>
+            <span class="product-star">*****</span>
+          </div>
+          <div class="wrap-product-name">
+            <span class="product-name">Product 1</span>
+            <button class="btn-add"><mat-icon>shopping_cart</mat-icon></button>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>

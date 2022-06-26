@@ -1,0 +1,114 @@
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Accounts</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="row m-0">
+      <div class="col-12">
+        <div class="row mr-0 mt-2">
+          <div class="col-md-3 mb-3">
+            <label for="id">ID</label>
+            <input
+              type="text"
+              class="form-control"
+              id="id"
+              disabled
+              [(ngModel)]="myAccount.accId"
+            />
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              required
+              [(ngModel)]="myAccount.username"
+            />
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="password">Password</label>
+            <input
+              type="text"
+              class="form-control"
+              id="password"
+              required
+              [(ngModel)]="myAccount.password"
+            />
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="role">Role</label>
+            <select class="custom-select" [(ngModel)]="myAccount.role">
+              <option value="admin">admin</option>
+              <option value="user">user</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mb-3 text-right">
+      <button
+        type="button"
+        class="btn btn-primary ml-2 d-inline-flex"
+        (click)="createAccount()"
+      >
+        <mat-icon>add</mat-icon>
+        <span>&nbsp;Create</span>
+      </button>
+      <button
+        type="button"
+        class="btn btn-secondary ml-2 d-inline-flex"
+        (click)="clearForm()"
+      >
+        <mat-icon>clear</mat-icon>
+        <span>&nbsp;Clear</span>
+      </button>
+      <button
+        type="button"
+        class="btn btn-success ml-2 d-inline-flex"
+        (click)="updateAccount()"
+        [disabled]="myAccount.accId == null"
+      >
+        <mat-icon>update</mat-icon>
+        <span>&nbsp;Update</span>
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger ml-2 d-inline-flex"
+        (click)="deleteAccount()"
+        [disabled]="myAccount.accId == null"
+      >
+        <mat-icon>delete</mat-icon>
+        <span>&nbsp;Delete</span>
+      </button>
+    </div>
+    <table mat-table [dataSource]="dataSourceAccount" matSort>
+      <ng-container matColumnDef="accId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.accId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
+        <td mat-cell *matCellDef="let element">{{ element.username }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="password">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Password</th>
+        <td mat-cell *matCellDef="let element">{{ element.password }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+        <td mat-cell *matCellDef="let element">{{ element.role }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsAccount"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumnsAccount"
+        (click)="selectAccount(row)"
+      ></tr>
+    </table>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 30, 40, 50]">
+    </mat-paginator>
+  </div>
+</div>

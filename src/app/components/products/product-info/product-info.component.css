@@ -12,3 +12,15 @@ th.mat-header-cell {
   background-color: #17a2b8;
   font-size: 1rem;
 }
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cell-product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}

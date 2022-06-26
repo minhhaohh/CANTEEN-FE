@@ -41,6 +41,16 @@ import { DeliveryComponent } from './components/delivery/delivery.component';
 import { ReportComponent } from './components/report/report.component';
 import { OrderReportComponent } from './components/report/order-report/order-report.component';
 import { ImportProductReportComponent } from './components/report/import-product-report/import-product-report.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { UserComponent } from './pages/user/user.component';
+import { ShopSidenavComponent } from './components/shop-sidenav/shop-sidenav.component';
+import { ShopComponent } from './components/shop/shop.component';
+import { ShopProductDetailComponent } from './components/shop-product-detail/shop-product-detail.component';
+import { ShopCartComponent } from './components/shop-cart/shop-cart.component';
+import { ShopCheckoutComponent } from './components/shop-checkout/shop-checkout.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { AccountComponent } from './components/account/account.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +71,16 @@ import { ImportProductReportComponent } from './components/report/import-product
     ReportComponent,
     OrderReportComponent,
     ImportProductReportComponent,
+    AdminComponent,
+    UserComponent,
+    ShopSidenavComponent,
+    ShopComponent,
+    ShopProductDetailComponent,
+    ShopCartComponent,
+    ShopCheckoutComponent,
+    LoginComponent,
+    SignUpComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,15 @@ export class FormatDate {
     };
   }
 
+  public dateToDateString(date: Date): string {
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  }
+
   public ngbDateStructToDate(ngbDate: NgbDateStruct): Date {
     return new Date(`${ngbDate.year}-${ngbDate.month}-${ngbDate.day + 1}`);
+  }
+
+  public ngbDateStructToDateString(ngbDate: NgbDateStruct): string {
+    return `${ngbDate.year}-${ngbDate.month}-${ngbDate.day}`;
   }
 }

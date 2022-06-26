@@ -8,6 +8,7 @@ export class Order {
   cusEmail: string = null;
   deliveryAddress: string = null;
   note: string = null;
+  isPaid: boolean = false;
   status: string = null;
   accId: number = null;
 }

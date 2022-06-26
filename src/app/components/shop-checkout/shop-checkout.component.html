@@ -1,0 +1,89 @@
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Checkout</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="row">
+      <div class="col-md-8">
+        <h1 class="checkout-title">Check out</h1>
+        <div class="col-md-12 mb-3">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            required
+            [(ngModel)]="myOrder.cusName"
+          />
+        </div>
+        <div class="col-md-12 mb-3">
+          <label for="phone">Phone</label>
+          <input
+            type="text"
+            class="form-control"
+            id="phone"
+            required
+            [(ngModel)]="myOrder.cusPhone"
+          />
+        </div>
+        <div class="col-md-12 mb-3">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            class="form-control"
+            id="email"
+            required
+            [(ngModel)]="myOrder.cusEmail"
+          />
+        </div>
+        <div class="col-md-12 mb-3">
+          <label for="delivery-address">Delivery Address</label>
+          <input
+            type="text"
+            class="form-control"
+            id="delivery-address"
+            required
+            [(ngModel)]="myOrder.deliveryAddress"
+          />
+        </div>
+        <div class="col-md-12 mb-3">
+          <label for="delivery-address">Note</label>
+          <input
+            type="text"
+            class="form-control"
+            id="note"
+            required
+            [(ngModel)]="myOrder.note"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="cart-total">
+          <span class="cart-total-title">Cart Total</span>
+          <div class="wrap-cart-total-item">
+            <span>Subtotal:</span>
+            <span>{{ totalPayment }}đ</span>
+          </div>
+          <div class="wrap-cart-total-item">
+            <span>Delivery:</span>
+            <span>Free</span>
+          </div>
+          <div class="wrap-cart-total-item">
+            <span>Total:</span>
+            <span>{{ totalPayment }}đ</span>
+          </div>
+          <div class="wrap-cart-total-item">
+            <mat-radio-group>
+              <mat-radio-button value="delivery" checked>
+                Cash on delivery
+              </mat-radio-button>
+              <br />
+              <mat-radio-button value="momo">Momo</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <button class="btn-checkout btn btn-warning" (click)="createOrder()">
+            Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

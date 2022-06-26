@@ -6,15 +6,18 @@
         <div class="input-group">
           <input
             class="form-control"
-            name="dp"
+            name="dpfrom"
             ngbDatepicker
             #d="ngbDatepicker"
+            [(ngModel)]="datepickerFrom"
           />
           <button
             class="btn btn-outline-secondary calendar"
             (click)="d.toggle()"
             type="button"
-          ></button>
+          >
+            <mat-icon class="calendar-icon">calendar_today</mat-icon>
+          </button>
         </div>
       </div>
       <div class="col-md-3 mb-3">
@@ -22,20 +25,27 @@
         <div class="input-group">
           <input
             class="form-control"
-            name="dp"
+            name="dpto"
             ngbDatepicker
-            #d="ngbDatepicker"
+            #c="ngbDatepicker"
+            [(ngModel)]="datepickerTo"
           />
           <button
             class="btn btn-outline-secondary calendar"
-            (click)="d.toggle()"
+            (click)="c.toggle()"
             type="button"
-          ></button>
+          >
+            <mat-icon class="calendar-icon">calendar_today</mat-icon>
+          </button>
         </div>
       </div>
       <div class="col-md-2 mb-3 text-right mt-2">
         <br />
-        <button type="button" class="btn btn-primary ml-2 d-inline-flex">
+        <button
+          type="button"
+          class="btn btn-primary ml-2 d-inline-flex"
+          (click)="getImportProductsFromDateToDate()"
+        >
           <mat-icon>search</mat-icon>
           <span>&nbsp;Search</span>
         </button>
@@ -71,7 +81,7 @@
       <ng-container matColumnDef="importDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Import Date</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.importDate | date }}
+          {{ element.importDate | date: "dd/MM/yyyy" }}
         </td>
       </ng-container>
 
@@ -94,5 +104,16 @@
     <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 30, 40, 50]">
     </mat-paginator>
   </div>
-  <div class="col-6"></div>
+  <div class="col-6">
+    <div class="divChart">
+      <canvas #myChart></canvas>
+    </div>
+    <!-- <div class="row">
+      <div class="col-12">
+        <div class="divChart">
+          <canvas #myChart2></canvas>
+        </div>
+      </div>
+    </div> -->
+  </div>
 </div>

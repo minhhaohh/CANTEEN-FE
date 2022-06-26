@@ -1,0 +1,83 @@
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Shopping Cart</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="row">
+      <div class="col-md-8">
+        <table mat-table [dataSource]="dataSourceOrderDetail" matSort>
+          <ng-container matColumnDef="image">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+            <td mat-cell *matCellDef="let element">
+              <img
+                class="product-img"
+                src="{{ element.image }}"
+                alt="{{ element.proName }}"
+              />
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="proName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Product</th>
+            <td mat-cell *matCellDef="let element">{{ element.proName }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+            <td mat-cell *matCellDef="let element">{{ element.price }}đ</td>
+          </ng-container>
+
+          <ng-container matColumnDef="qty">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
+            <td mat-cell *matCellDef="let element">
+              <div class="wrap-product-qty">
+                <label class="product-qty-label" for="qty">Qty: </label>
+                <input
+                  class="product-qty-input"
+                  type="number"
+                  id="qty"
+                  name="qty"
+                  min="0"
+                  [(ngModel)]="element.qty"
+                />
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+            <td mat-cell *matCellDef="let element">{{ element.amount }}đ</td>
+          </ng-container>
+
+          <tr
+            mat-header-row
+            *matHeaderRowDef="displayedColumnsOrderDetail"
+          ></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumnsOrderDetail"
+            (click)="selectRow(row)"
+          ></tr>
+        </table>
+      </div>
+      <div class="col-md-4">
+        <div class="cart-total">
+          <span class="cart-total-title">Cart Total</span>
+          <div class="wrap-cart-total-item">
+            <span>Subtotal:</span>
+            <span>{{ totalPayment }}đ</span>
+          </div>
+          <div class="wrap-cart-total-item">
+            <span>Delivery:</span>
+            <span>Free</span>
+          </div>
+          <div class="wrap-cart-total-item">
+            <span>Total:</span>
+            <span>{{ totalPayment }}đ</span>
+          </div>
+          <a class="btn-checkout btn btn-warning" routerLink="/user/checkout">
+            Checkout
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

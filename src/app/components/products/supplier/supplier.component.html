@@ -73,6 +73,7 @@
           type="button"
           class="btn btn-success ml-2 d-inline-flex"
           (click)="updateSupplier()"
+          [disabled]="mySupplier.supId == null"
         >
           <mat-icon>update</mat-icon>
           <span>&nbsp;Update</span>
@@ -81,6 +82,7 @@
           type="button"
           class="btn btn-danger ml-2 d-inline-flex"
           (click)="deleteSupplier()"
+          [disabled]="mySupplier.supId == null"
         >
           <mat-icon>delete</mat-icon>
           <span>&nbsp;Delete</span>

@@ -1,6 +1,6 @@
 <div class="row m-0 mt-2">
   <div class="col-6">
-    <div class="row mr-0">
+    <div class="row mb-1 mr-0">
       <div class="col-md-2 mb-3">
         <label for="id">ID</label>
         <input
@@ -42,6 +42,10 @@
         />
       </div>
     </div>
+    <br />
+    <br />
+    <br />
+    <br />
     <h2>List of Employee</h2>
     <table mat-table [dataSource]="dataSourceEmployee" matSort>
       <ng-container matColumnDef="empId">
@@ -62,7 +66,7 @@
       <ng-container matColumnDef="birthdate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Birthdate</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.birthdate | date }}
+          {{ element.birthdate | date: "dd/MM/yyyy" }}
         </td>
       </ng-container>
 
@@ -93,12 +97,12 @@
   </div>
   <div class="col-6">
     <div class="row mr-0">
-      <div class="col-md-2 mb-3">
+      <div class="col-md-3 mb-3">
         <label for="from-date">From Date</label>
         <div class="input-group">
           <input
             class="form-control"
-            name="dp"
+            name="dpfrom"
             ngbDatepicker
             #d="ngbDatepicker"
             [(ngModel)]="datepickerFrom"
@@ -113,20 +117,20 @@
           </button>
         </div>
       </div>
-      <div class="col-md-2 mb-3">
+      <div class="col-md-3 mb-3">
         <label for="to-date">To Date</label>
         <div class="input-group">
           <input
             class="form-control"
-            name="dp"
+            name="dpto"
             ngbDatepicker
-            #d="ngbDatepicker"
+            #c="ngbDatepicker"
             [(ngModel)]="datepickerTo"
             (ngModelChange)="getShiftNumber()"
           />
           <button
             class="btn btn-outline-secondary calendar"
-            (click)="d.toggle()"
+            (click)="c.toggle()"
             type="button"
           >
             <mat-icon class="calendar-icon">calendar_today</mat-icon>
@@ -163,12 +167,13 @@
           disabled
         />
       </div>
-      <div class="col-md-2 mb-3 text-right mt-2">
+      <div class="col-md-12 mb-3 text-right mt-2">
         <br />
         <button
           type="button"
           class="btn btn-primary ml-2 d-inline-flex"
           (click)="createPaySalary()"
+          [disabled]="myEmployee.empId == null"
         >
           <mat-icon>check</mat-icon>
           <span>&nbsp;Confirm</span>
@@ -190,19 +195,19 @@
       <ng-container matColumnDef="fromDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>From Date</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.fromDate | date }}
+          {{ element.fromDate | date: "dd/MM/yyyy" }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="toDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>To Date</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.toDate | date }}
+          {{ element.toDate | date: "dd/MM/yyyy" }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="shiftNumber">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Shift Number</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Shifts Number</th>
         <td mat-cell *matCellDef="let element">{{ element.shiftNumber }}</td>
       </ng-container>
 

@@ -22,3 +22,14 @@ th.mat-header-cell {
 .mat-radio-button ~ .mat-radio-button {
   margin-left: 16px;
 }
+
+.employee-image {
+  width: 50%;
+  object-fit: contain;
+}
+
+.cell-employee-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}

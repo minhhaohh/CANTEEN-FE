@@ -1,0 +1,39 @@
+@import "../home/home.component.css";
+
+.page__box {
+  background-color: #0ea4dd;
+}
+
+.checkout-title {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.cart-total {
+  padding: 28px;
+  background-color: #f5f7fa;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-total-title {
+  font-size: 1.6rem;
+  margin: 8px 0 32px;
+  font-weight: 500;
+}
+
+.wrap-cart-total-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  color: #6d6d6d;
+  margin: 20px 0;
+}
+
+.btn-checkout {
+  margin-top: 40px;
+  color: #fff !important;
+  font-weight: 500;
+  font-size: 1.2rem;
+}

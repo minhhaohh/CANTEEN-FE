@@ -36,7 +36,9 @@ export class ImportProductComponent implements OnInit {
     'proId',
     'proName',
     'importQty',
+    'unit',
     'importDate',
+    'importPayment',
     'supName',
   ];
 
@@ -73,7 +75,6 @@ export class ImportProductComponent implements OnInit {
   getAllSuppliers() {
     this.supplierRepo.getAllSuppliers('api/supplier').subscribe((res: any) => {
       this.suppliers = res as Supplier[];
-      console.log(this.suppliers);
     });
   }
 
@@ -89,6 +90,7 @@ export class ImportProductComponent implements OnInit {
     this.importProductRepo
       .getAllImportProducts('api/import-product')
       .subscribe((res: any) => {
+        console.log(res);
         this.dataSourceImportProduct.data = res as ImportProduct[];
       });
   }
@@ -104,5 +106,20 @@ export class ImportProductComponent implements OnInit {
       });
   }
 
-  clearForm() {}
+  clearForm() {
+    this.myProduct.proId = null;
+    this.myProduct.proName = null;
+    this.myProduct.price = null;
+    this.myProduct.totalQty = null;
+    this.myProduct.unit = null;
+    this.myProduct.type = null;
+    this.myProduct.image = null;
+    this.myImportProduct.proId = null;
+    this.myImportProduct.proName = null;
+    this.myImportProduct.importQty = null;
+    this.myImportProduct.importDate = new Date();
+    this.myImportProduct.importPayment = null;
+    this.myImportProduct.supId = null;
+    this.myImportProduct.supName = null;
+  }
 }

@@ -18,6 +18,12 @@ export class ProductRepositoryService {
     );
   };
 
+  public getProductsByType = (route: string) => {
+    return this.http.get<Product[]>(
+      this.createCompleteRoute(route, this.envUrl.urlAddress)
+    );
+  };
+
   public getProduct = (route: string) => {
     return this.http.get<Product>(
       this.createCompleteRoute(route, this.envUrl.urlAddress)

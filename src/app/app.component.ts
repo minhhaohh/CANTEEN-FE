@@ -7,10 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'CANTEEN-FE';
-  sideBarOpen = true;
-
-  sideBarToggler() {
-    this.sideBarOpen = !this.sideBarOpen;
-    console.log(this.sideBarOpen);
-  }
 }

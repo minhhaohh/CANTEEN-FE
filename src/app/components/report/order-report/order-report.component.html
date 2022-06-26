@@ -6,15 +6,18 @@
         <div class="input-group">
           <input
             class="form-control"
-            name="dp"
+            name="dpfrom"
             ngbDatepicker
             #d="ngbDatepicker"
+            [(ngModel)]="datepickerFrom"
           />
           <button
             class="btn btn-outline-secondary calendar"
             (click)="d.toggle()"
             type="button"
-          ></button>
+          >
+            <mat-icon class="calendar-icon">calendar_today</mat-icon>
+          </button>
         </div>
       </div>
       <div class="col-md-3 mb-3">
@@ -22,20 +25,27 @@
         <div class="input-group">
           <input
             class="form-control"
-            name="dp"
+            name="dpto"
             ngbDatepicker
-            #d="ngbDatepicker"
+            #c="ngbDatepicker"
+            [(ngModel)]="datepickerTo"
           />
           <button
             class="btn btn-outline-secondary calendar"
-            (click)="d.toggle()"
+            (click)="c.toggle()"
             type="button"
-          ></button>
+          >
+            <mat-icon class="calendar-icon">calendar_today</mat-icon>
+          </button>
         </div>
       </div>
       <div class="col-md-2 mb-3 text-right mt-2">
         <br />
-        <button type="button" class="btn btn-primary ml-2 d-inline-flex">
+        <button
+          type="button"
+          class="btn btn-primary ml-2 d-inline-flex"
+          (click)="getOrdersFromDateToDate()"
+        >
           <mat-icon>search</mat-icon>
           <span>&nbsp;Search</span>
         </button>
@@ -61,7 +71,7 @@
       <ng-container matColumnDef="createdDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Created Date</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.createdDate | date }}
+          {{ element.createdDate | date: "dd/MM/yyyy" }}
         </td>
       </ng-container>
 
@@ -75,9 +85,9 @@
         <td mat-cell *matCellDef="let element">{{ element.isDelivery }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-        <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+      <ng-container matColumnDef="cusName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Cus Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.cusName }}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumnsOrder"></tr>

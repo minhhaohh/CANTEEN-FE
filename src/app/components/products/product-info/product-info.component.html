@@ -46,7 +46,11 @@
         <select class="custom-select" [(ngModel)]="myProduct.unit">
           <option value="to">to</option>
           <option value="o">o</option>
-          <option value="bich">bich</option>
+          <option value="lon">lon</option>
+          <option value="chai">chai</option>
+          <option value="ly">ly</option>
+          <option value="phan">phan</option>
+          <option value="trai">trai</option>
         </select>
       </div>
       <div class="col-md-2 mb-3">
@@ -55,6 +59,7 @@
           <option value="breakfast">breakfast</option>
           <option value="snack">snack</option>
           <option value="drink">drink</option>
+          <option value="other">other</option>
         </select>
       </div>
       <div class="col-md-2 mb-3">
@@ -64,10 +69,14 @@
             type="file"
             class="custom-file-input"
             id="customFile"
-            [(ngModel)]="myProduct.image"
+            (change)="chooseFileImage($event)"
+            accept=".jpg, .jpeg, .png"
           />
           <label class="custom-file-label" for="customFile">Choose file</label>
         </div>
+      </div>
+      <div class="col-md-1 mb-3">
+        <img class="product-image" src="{{ myProduct.image }}" alt="" />
       </div>
       <div class="col-md-12 mb-3 text-right">
         <button
@@ -90,6 +99,7 @@
           type="button"
           class="btn btn-success ml-2 d-inline-flex"
           (click)="updateProduct()"
+          [disabled]="myProduct.proId == null"
         >
           <mat-icon>update</mat-icon>
           <span>&nbsp;Update</span>
@@ -98,6 +108,7 @@
           type="button"
           class="btn btn-danger ml-2 d-inline-flex"
           (click)="deleteProduct()"
+          [disabled]="myProduct.proId == null"
         >
           <mat-icon>delete</mat-icon>
           <span>&nbsp;Delete</span>
@@ -178,7 +189,9 @@
 
       <ng-container matColumnDef="image">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Image</th>
-        <td mat-cell *matCellDef="let element">{{ element.image }}</td>
+        <td mat-cell *matCellDef="let element">
+          <img class="cell-product-image" src="{{ element.image }}" alt="" />
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumnsProduct"></tr>

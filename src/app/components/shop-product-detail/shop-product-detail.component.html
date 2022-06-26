@@ -1,0 +1,39 @@
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Product Detail</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="row">
+      <div class="col-md-6">
+        <img
+          class="product-detail-img"
+          src="{{ myProduct.image }}"
+          alt="UTC2"
+        />
+      </div>
+      <div class="col-md-6">
+        <div class="wrap-product-detail-info">
+          <h2 class="product-detail-name mt-4">{{ myProduct.proName }}</h2>
+          <span class="product-detail-price mt-4">{{ myProduct.price }}đ</span>
+          <span class="product-detail-star mt-4">*****</span>
+          <span class="product-detail-desc mt-4">
+            CANTEEN UTC2, BEST CHOICE FOR YOUR LIFE
+          </span>
+          <div class="wrap-product-detail-qty mt-4">
+            <label class="product-detail-qty-label" for="qty">Qty: </label>
+            <input
+              class="product-detail-qty-input"
+              type="number"
+              id="qty"
+              name="qty"
+              min="0"
+              value="0"
+            />
+          </div>
+          <button class="product-detail-btn-add btn btn-warning mt-4">
+            <mat-icon>shopping_cart</mat-icon>
+            <span>&nbsp;Add to cart</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -18,6 +18,12 @@ export class ImportProductRepositoryService {
     );
   };
 
+  public getImportProductsBy = (route: string) => {
+    return this.http.get<ImportProduct[]>(
+      this.createCompleteRoute(route, this.envUrl.urlAddress)
+    );
+  };
+
   public createImportProduct = (
     route: string,
     importProduct: ImportProduct
