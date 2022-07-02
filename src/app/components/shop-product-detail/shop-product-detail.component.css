@@ -64,3 +64,48 @@
   display: flex;
   justify-content: center;
 }
+
+.products-list {
+  overflow-x: scroll;
+}
+
+.product {
+  font-size: 1rem;
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.wrap-product-price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0 4px;
+  color: #cc960f;
+}
+
+.wrap-product-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-name {
+  margin: 6px 0 4px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-add {
+  background-color: transparent;
+  border: none;
+}
+
+.btn-add:hover {
+  color: #a5a5a5;
+}

@@ -12,6 +12,7 @@ import { Timekeeping } from './../../../models/timekeeping.model';
 
 import { EmployeeRepositoryService } from './../../../shared/services/employee-repository.service';
 import { TimekeepingRepositoryService } from './../../../shared/services/timekeeping-repository.service';
+import { NotificationService } from './../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-timekeeping',
@@ -52,7 +53,8 @@ export class TimekeepingComponent implements OnInit, AfterViewInit {
 
   constructor(
     private employeeRepo: EmployeeRepositoryService,
-    private timekeepingRepo: TimekeepingRepositoryService
+    private timekeepingRepo: TimekeepingRepositoryService,
+    private noti: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -97,8 +99,18 @@ export class TimekeepingComponent implements OnInit, AfterViewInit {
     );
     this.timekeepingRepo
       .createTimekeeping('api/time-keeping', this.myTimekeeping)
-      .subscribe((res: any) => {
-        this.getAllTimekeepings();
-      });
+      .subscribe(
+        (res: any) => {
+          this.noti.showSuccess(
+            'Comfirmed Timekeeping Successfully!!!',
+            'Success Message'
+          );
+
+          this.getAllTimekeepings();
+        },
+        (error: any) => {
+          this.noti.showError(error.error, 'Error Message');
+        }
+      );
   }
 }

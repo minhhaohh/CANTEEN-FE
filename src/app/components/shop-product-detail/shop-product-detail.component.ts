@@ -12,6 +12,8 @@ import { ProductRepositoryService } from './../../shared/services/product-reposi
 export class ShopProductDetailComponent implements OnInit {
   myProduct = new Product();
   proId: number;
+  type: string;
+  products: Product[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -22,15 +24,31 @@ export class ShopProductDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       this.proId = Number(params.proId);
     });
-    this.selectProduct();
+    this.getProduct();
+    console.log(this.myProduct);
+    this.getRelatedProducts();
   }
 
-  selectProduct() {
+  getProduct() {
     this.productRepo
       .getProduct(`api/product/${this.proId}`)
       .subscribe((res: any) => {
         this.myProduct = res as Product;
+        this.type = this.myProduct.type;
         console.log(this.myProduct);
+      });
+  }
+
+  getRelatedProducts() {
+    this.productRepo
+      .getRelatedProducts(
+        `api/product/GetRelatedProducts/${this.myProduct.proId}/${this.myProduct.type}`
+      )
+      .subscribe((res: any) => {
+        console.log(this.myProduct.proId);
+        console.log(this.myProduct.type);
+        console.log(res);
+        this.products = res as Product[];
       });
   }
 }

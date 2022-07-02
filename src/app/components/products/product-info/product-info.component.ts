@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 
 import { Product } from './../../../models/product.model';
 import { ProductRepositoryService } from './../../../shared/services/product-repository.service';
+import { NotificationService } from './../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-product-info',
@@ -30,7 +31,10 @@ export class ProductInfoComponent implements OnInit, AfterViewInit {
 
   myProduct = new Product();
 
-  constructor(private productRepo: ProductRepositoryService) {}
+  constructor(
+    private productRepo: ProductRepositoryService,
+    private noti: NotificationService
+  ) {}
 
   ngOnInit(): void {
     this.getAllProducts();
@@ -56,31 +60,55 @@ export class ProductInfoComponent implements OnInit, AfterViewInit {
   }
 
   createProduct() {
-    this.productRepo
-      .createProduct('api/product', this.myProduct)
-      .subscribe((res: any) => {
+    this.productRepo.createProduct('api/product', this.myProduct).subscribe(
+      (res: any) => {
+        this.noti.showSuccess(
+          'Created Product Successfully!!!',
+          'Success Message'
+        );
         this.clearForm();
         this.getAllProducts();
-      });
+      },
+      (error: any) => {
+        this.noti.showError(error.error, 'Error Message');
+      }
+    );
   }
 
   updateProduct() {
     this.productRepo
       .updateProduct(`api/product/${this.myProduct.proId}`, this.myProduct)
-      .subscribe((res: any) => {
-        this.clearForm();
-        this.getAllProducts();
-      });
+      .subscribe(
+        (res: any) => {
+          this.noti.showSuccess(
+            'Updated Product Successfully!!!',
+            'Success Message'
+          );
+          this.clearForm();
+          this.getAllProducts();
+        },
+        (error: any) => {
+          this.noti.showError(error.error, 'Error Message');
+        }
+      );
   }
 
   deleteProduct() {
     this.productRepo
       .deleteProduct(`api/product/${this.myProduct.proId}`)
-      .subscribe((res: any) => {
-        console.log(res);
-        this.clearForm();
-        this.getAllProducts();
-      });
+      .subscribe(
+        (res: any) => {
+          this.noti.showSuccess(
+            'Deleted Product Successfully!!!',
+            'Success Message'
+          );
+          this.clearForm();
+          this.getAllProducts();
+        },
+        (error: any) => {
+          this.noti.showError(error.error, 'Error Message');
+        }
+      );
   }
 
   clearForm() {
@@ -93,24 +121,10 @@ export class ProductInfoComponent implements OnInit, AfterViewInit {
     this.myProduct.image = null;
   }
 
-  localUrl: any[];
-  showPreviewImage(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-      reader.onload = (event: any) => {
-        this.localUrl = event.target.result;
-        console.log(this.localUrl);
-      };
-      reader.readAsDataURL(event.target.files[0]);
-      console.log(reader);
-    }
-  }
-
   chooseFileImage(event) {
     var path = '../../assets/images/products/';
     var fileName = event.target.files[0].name;
     path += fileName;
-    console.log(path);
     this.myProduct.image = path;
   }
 }

@@ -8,6 +8,7 @@ import { Order } from './../../models/order.model';
 import { OrderDetail } from './../../models/order-detail.model';
 import { OrderRepositoryService } from './../../shared/services/order-repository.service';
 import { OrderDetailRepositoryService } from './../../shared/services/order-detail-repository.service';
+import { NotificationService } from './../../shared/services/notification.service';
 
 @Component({
   selector: 'app-delivery',
@@ -44,7 +45,8 @@ export class DeliveryComponent implements OnInit, AfterViewInit {
 
   constructor(
     private orderRepo: OrderRepositoryService,
-    private orderDetailRepo: OrderDetailRepositoryService
+    private orderDetailRepo: OrderDetailRepositoryService,
+    private noti: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -77,9 +79,17 @@ export class DeliveryComponent implements OnInit, AfterViewInit {
     this.myOrder.status = status;
     this.orderRepo
       .updateOrder(`api/order/${this.myOrder.orderId}`, this.myOrder)
-      .subscribe((res: any) => {
-        console.log(res);
-        this.getOrdersNeedDeliver();
-      });
+      .subscribe(
+        (res: any) => {
+          this.noti.showSuccess(
+            `Set status ${status} Successfully!!!`,
+            'Success Message'
+          );
+          this.getOrdersNeedDeliver();
+        },
+        (error: any) => {
+          this.noti.showError(error.error, 'Error Message');
+        }
+      );
   }
 }

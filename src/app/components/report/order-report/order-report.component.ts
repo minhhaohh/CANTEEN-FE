@@ -28,7 +28,12 @@ export class OrderReportComponent implements OnInit, AfterViewInit {
 
   formatDate = new FormatDate();
 
-  @ViewChild('myChart', { static: true }) elemento: ElementRef;
+  chartOrder: any;
+  canvasOrder: any;
+  ctxOrder: any;
+  typeOrder: string = 'bar';
+  labelsOrder = [];
+  datasOrder = [];
 
   public dataSourceOrder = new MatTableDataSource<Order>();
 
@@ -67,24 +72,23 @@ export class OrderReportComponent implements OnInit, AfterViewInit {
   getAllOrders() {
     this.orderRepo.getAllOrders('api/order').subscribe((res: any) => {
       this.dataSourceOrder.data = res as Order[];
-      // const myLabels = this.dataSourceOrder.data.map((order) =>
-      //   this.formatDate.dateToDateString(new Date(order.createdDate))
-      // );
-      // const myDatas = this.dataSourceOrder.data.map(
-      //   (order) => order.totalPayment
-      // );
       const group = this.groupBy(this.dataSourceOrder.data, 'createdDate');
-      const myLabelsGroup = [];
-      const myDatasGroup = [];
+
       Object.keys(group).forEach((key) => {
-        myLabelsGroup.push(this.formatDate.dateToDateString(new Date(key)));
+        this.labelsOrder.push(this.formatDate.dateToDateString(new Date(key)));
         var total = 0;
         group[key].forEach((ord) => (total += ord.totalPayment));
-        myDatasGroup.push(total);
+        this.datasOrder.push(total);
       });
-      console.log(myLabelsGroup);
-      console.log(myDatasGroup);
-      this.createChart(myLabelsGroup, myDatasGroup);
+      this.canvasOrder = document.getElementById('chart-order');
+      this.ctxOrder = this.canvasOrder.getContext('2d');
+      this.createChart(
+        this.chartOrder,
+        this.ctxOrder,
+        this.typeOrder,
+        this.labelsOrder,
+        this.datasOrder
+      );
     });
   }
 
@@ -97,18 +101,44 @@ export class OrderReportComponent implements OnInit, AfterViewInit {
       .getOrdersBy(`api/order/GetOrdersFromDateToDate/${fromDate}/${toDate}`)
       .subscribe((res: any) => {
         this.dataSourceOrder.data = res as Order[];
+
+        this.labelsOrder = [];
+        this.datasOrder = [];
         const group = this.groupBy(this.dataSourceOrder.data, 'createdDate');
-        const myLabelsGroup = [];
-        const myDatasGroup = [];
         Object.keys(group).forEach((key) => {
-          myLabelsGroup.push(this.formatDate.dateToDateString(new Date(key)));
+          this.labelsOrder.push(
+            this.formatDate.dateToDateString(new Date(key))
+          );
           var total = 0;
           group[key].forEach((ord) => (total += ord.totalPayment));
-          myDatasGroup.push(total);
+          this.datasOrder.push(total);
         });
-        console.log(myLabelsGroup);
-        console.log(myDatasGroup);
-        this.createChart(myLabelsGroup, myDatasGroup);
+        this.canvasOrder = document.getElementById('chart-order');
+        this.ctxOrder = this.canvasOrder.getContext('2d');
+        this.createChart(
+          this.chartOrder,
+          this.ctxOrder,
+          this.typeOrder,
+          this.labelsOrder,
+          this.datasOrder
+        );
+      });
+  }
+
+  exportExcel() {
+    this.orderRepo
+      .exportExcel('api/order/ExportToExcel')
+      .subscribe((res: any) => {
+        console.log(res);
+        let fileName = res.headers
+          .get('content-disposition')
+          ?.split(';')[1]
+          .split('=')[1];
+        let blob: Blob = res.body as Blob;
+        let a = document.createElement('a');
+        a.download = fileName;
+        a.href = window.URL.createObjectURL(blob);
+        a.click();
       });
   }
 
@@ -119,9 +149,15 @@ export class OrderReportComponent implements OnInit, AfterViewInit {
     }, {});
   }
 
-  createChart(myLabels: any, myDatas: any) {
-    const myChart = new Chart(this.elemento.nativeElement, {
-      type: 'bar',
+  createChart(
+    mychart: any,
+    myCtx: any,
+    myType: any,
+    myLabels: any,
+    myDatas: any
+  ) {
+    mychart = new Chart(myCtx, {
+      type: myType,
       data: {
         labels: myLabels,
         datasets: [
@@ -129,12 +165,12 @@ export class OrderReportComponent implements OnInit, AfterViewInit {
             label: 'Total Payment',
             data: myDatas,
             backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
+              'rgba(255, 99, 132, 0.5)',
+              'rgba(54, 162, 235, 0.5)',
+              'rgba(255, 206, 86, 0.5)',
+              'rgba(75, 192, 192, 0.5)',
+              'rgba(153, 102, 255, 0.5)',
+              'rgba(255, 159, 64, 0.5)',
             ],
             borderColor: [
               'rgba(255, 99, 132, 1)',
@@ -149,10 +185,19 @@ export class OrderReportComponent implements OnInit, AfterViewInit {
         ],
       },
       options: {
+        legend: {
+          display: true,
+        },
+        responsive: true,
+        display: true,
         scales: {
-          y: {
-            beginAtZero: true,
-          },
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          ],
         },
       },
     });

@@ -30,10 +30,10 @@ export class AccountRepositoryService {
     );
   };
 
-  public createAccount = (route: string, employee: Account) => {
+  public createAccount = (route: string, account: Account) => {
     return this.http.post<Account>(
       this.createCompleteRoute(route, this.envUrl.urlAddress),
-      employee,
+      account,
       this.generateHeaders()
     );
   };

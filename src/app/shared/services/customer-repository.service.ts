@@ -1,58 +1,46 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Product } from './../../models/product.model';
+import { Customer } from './../../models/customer.model';
 import { EnvironmentUrlService } from './environment-url.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductRepositoryService {
+export class CustomerRepositoryService {
   constructor(
     private http: HttpClient,
     private envUrl: EnvironmentUrlService
   ) {}
 
-  public getAllProducts = (route: string) => {
-    return this.http.get<Product[]>(
+  public getAllCustomers = (route: string) => {
+    return this.http.get<Customer[]>(
       this.createCompleteRoute(route, this.envUrl.urlAddress)
     );
   };
 
-  public getProductsByType = (route: string) => {
-    return this.http.get<Product[]>(
+  public getCustomer = (route: string) => {
+    return this.http.get<Customer>(
       this.createCompleteRoute(route, this.envUrl.urlAddress)
     );
   };
 
-  public getRelatedProducts = (route: string) => {
-    return this.http.get<Product[]>(
-      this.createCompleteRoute(route, this.envUrl.urlAddress)
-    );
-  };
-
-  public getProduct = (route: string) => {
-    return this.http.get<Product>(
-      this.createCompleteRoute(route, this.envUrl.urlAddress)
-    );
-  };
-
-  public createProduct = (route: string, product: Product) => {
-    return this.http.post<Product>(
+  public createCustomer = (route: string, customer: Customer) => {
+    return this.http.post<Customer>(
       this.createCompleteRoute(route, this.envUrl.urlAddress),
-      product,
+      customer,
       this.generateHeaders()
     );
   };
 
-  public updateProduct = (route: string, product: Product) => {
+  public updateCustomer = (route: string, customer: Customer) => {
     return this.http.put(
       this.createCompleteRoute(route, this.envUrl.urlAddress),
-      product,
+      customer,
       this.generateHeaders()
     );
   };
 
-  public deleteProduct = (route: string) => {
+  public deleteCustomer = (route: string) => {
     return this.http.delete(
       this.createCompleteRoute(route, this.envUrl.urlAddress)
     );

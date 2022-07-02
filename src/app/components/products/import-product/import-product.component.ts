@@ -10,6 +10,7 @@ import { Supplier } from './../../../models/supplier.model';
 import { ProductRepositoryService } from './../../../shared/services/product-repository.service';
 import { ImportProductRepositoryService } from './../../../shared/services/import-product-repository.service';
 import { SupplierRepositoryService } from './../../../shared/services/supplier-repository.service';
+import { NotificationService } from './../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-import-product',
@@ -50,7 +51,8 @@ export class ImportProductComponent implements OnInit {
   constructor(
     private productRepo: ProductRepositoryService,
     private importProductRepo: ImportProductRepositoryService,
-    private supplierRepo: SupplierRepositoryService
+    private supplierRepo: SupplierRepositoryService,
+    private noti: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -99,11 +101,20 @@ export class ImportProductComponent implements OnInit {
     this.myImportProduct.proId = this.myProduct.proId;
     this.importProductRepo
       .createImportProduct('api/import-product', this.myImportProduct)
-      .subscribe((res: any) => {
-        this.clearForm();
-        this.getAllImportProducts();
-        this.getAllProducts();
-      });
+      .subscribe(
+        (res: any) => {
+          this.noti.showSuccess(
+            'Imported Product Successfully!!!',
+            'Success Message'
+          );
+          this.clearForm();
+          this.getAllImportProducts();
+          this.getAllProducts();
+        },
+        (error: any) => {
+          this.noti.showError(error.error, 'Error Message');
+        }
+      );
   }
 
   clearForm() {

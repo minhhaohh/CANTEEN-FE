@@ -14,6 +14,7 @@ import { PaySalary } from './../../../models/pay-salary.model';
 import { EmployeeRepositoryService } from './../../../shared/services/employee-repository.service';
 import { TimekeepingRepositoryService } from './../../../shared/services/timekeeping-repository.service';
 import { PaySalaryRepositoryService } from './../../../shared/services/pay-salary-repository.service';
+import { NotificationService } from './../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-pay-salary',
@@ -63,7 +64,8 @@ export class PaySalaryComponent implements OnInit {
   constructor(
     private employeeRepo: EmployeeRepositoryService,
     private paySalaryRepo: PaySalaryRepositoryService,
-    private timekeepingRepo: TimekeepingRepositoryService
+    private timekeepingRepo: TimekeepingRepositoryService,
+    private noti: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -111,10 +113,18 @@ export class PaySalaryComponent implements OnInit {
     );
     this.paySalaryRepo
       .createPaySalary('api/pay-salary', this.myPaySalary)
-      .subscribe((res: any) => {
-        console.log(res);
-        this.getAllPaySalarys();
-      });
+      .subscribe(
+        (res: any) => {
+          this.noti.showSuccess(
+            'Comfirmed PaySalary Successfully!!!',
+            'Success Message'
+          );
+          this.getAllPaySalarys();
+        },
+        (error: any) => {
+          this.noti.showError(error.error, 'Error Message');
+        }
+      );
   }
 
   getShiftNumber() {

@@ -4,6 +4,7 @@ import { Product } from './../../models/product.model';
 import { OrderDetail } from './../../models/order-detail.model';
 import { ProductRepositoryService } from './../../shared/services/product-repository.service';
 import { CartService } from './../../shared/services/cart.service';
+import { NotificationService } from './../../shared/services/notification.service';
 
 @Component({
   selector: 'app-shop',
@@ -16,7 +17,8 @@ export class ShopComponent implements OnInit {
 
   constructor(
     private productRepo: ProductRepositoryService,
-    private cart: CartService
+    private cart: CartService,
+    private noti: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -67,5 +69,7 @@ export class ShopComponent implements OnInit {
       orderDetail.amount = product.price;
       this.cart.addOrderDetail(orderDetail);
     }
+
+    this.noti.showSuccess('Added to Cart Successfully!!!', 'Success Message');
   }
 }

@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 
 import { Supplier } from './../../../models/supplier.model';
 import { SupplierRepositoryService } from './../../../shared/services/supplier-repository.service';
+import { NotificationService } from './../../../shared/services/notification.service';
 
 @Component({
   selector: 'app-supplier',
@@ -28,7 +29,10 @@ export class SupplierComponent implements OnInit, AfterViewInit {
 
   mySupplier = new Supplier();
 
-  constructor(private repo: SupplierRepositoryService) {}
+  constructor(
+    private repo: SupplierRepositoryService,
+    private noti: NotificationService
+  ) {}
 
   ngOnInit(): void {
     this.getAllSuppliers();
@@ -55,31 +59,54 @@ export class SupplierComponent implements OnInit, AfterViewInit {
   }
 
   createSupplier() {
-    this.repo
-      .createSupplier('api/supplier', this.mySupplier)
-      .subscribe((res: any) => {
+    this.repo.createSupplier('api/supplier', this.mySupplier).subscribe(
+      (res: any) => {
+        this.noti.showSuccess(
+          'Created Supplier Successfully!!!',
+          'Success Message'
+        );
         this.clearForm();
         this.getAllSuppliers();
-      });
+      },
+      (error: any) => {
+        this.noti.showError(error.error, 'Error Message');
+      }
+    );
   }
 
   updateSupplier() {
     this.repo
       .updateSupplier(`api/supplier/${this.mySupplier.supId}`, this.mySupplier)
-      .subscribe((res: any) => {
-        this.clearForm();
-        this.getAllSuppliers();
-      });
+      .subscribe(
+        (res: any) => {
+          this.noti.showSuccess(
+            'Updated Supplier Successfully!!!',
+            'Success Message'
+          );
+          this.clearForm();
+          this.getAllSuppliers();
+        },
+        (error: any) => {
+          this.noti.showError(error.error, 'Error Message');
+        }
+      );
   }
 
   deleteSupplier() {
-    this.repo
-      .deleteSupplier(`api/supplier/${this.mySupplier.supId}`)
-      .subscribe((res: any) => {
+    this.repo.deleteSupplier(`api/supplier/${this.mySupplier.supId}`).subscribe(
+      (res: any) => {
+        this.noti.showSuccess(
+          'Deleted Supplier Successfully!!!',
+          'Success Message'
+        );
         console.log(res);
         this.clearForm();
         this.getAllSuppliers();
-      });
+      },
+      (error: any) => {
+        this.noti.showError(error.error, 'Error Message');
+      }
+    );
   }
 
   clearForm() {

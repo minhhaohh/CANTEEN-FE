@@ -11,6 +11,8 @@ import { AuthService } from './../../shared/services/auth.service';
 export class HeaderComponent implements OnInit {
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
 
+  username: string = localStorage.getItem('username');
+
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}

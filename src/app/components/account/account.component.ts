@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 
 import { Account } from './../../models/account.model';
 import { AccountRepositoryService } from './../../shared/services/account-repository.service';
+import { NotificationService } from './../../shared/services/notification.service';
 
 @Component({
   selector: 'app-account',
@@ -22,7 +23,10 @@ export class AccountComponent implements OnInit {
 
   myAccount = new Account();
 
-  constructor(private repo: AccountRepositoryService) {}
+  constructor(
+    private repo: AccountRepositoryService,
+    private noti: NotificationService
+  ) {}
 
   ngOnInit(): void {
     this.getAllAccounts();
@@ -50,31 +54,54 @@ export class AccountComponent implements OnInit {
   }
 
   createAccount() {
-    this.repo
-      .createAccount('api/account', this.myAccount)
-      .subscribe((res: any) => {
+    this.repo.createAccount('api/account', this.myAccount).subscribe(
+      (res: any) => {
+        this.noti.showSuccess(
+          'Created Account Successfully!!!',
+          'Success Message'
+        );
         this.clearForm();
         this.getAllAccounts();
-      });
+      },
+      (error: any) => {
+        this.noti.showError(error.error, 'Error Message');
+      }
+    );
   }
 
   updateAccount() {
     this.repo
       .updateAccount(`api/account/${this.myAccount.accId}`, this.myAccount)
-      .subscribe((res: any) => {
-        this.clearForm();
-        this.getAllAccounts();
-      });
+      .subscribe(
+        (res: any) => {
+          this.noti.showSuccess(
+            'Updated Account Successfully!!!',
+            'Success Message'
+          );
+          this.clearForm();
+          this.getAllAccounts();
+        },
+        (error: any) => {
+          this.noti.showError(error.error, 'Error Message');
+        }
+      );
   }
 
   deleteAccount() {
-    this.repo
-      .deleteAccount(`api/account/${this.myAccount.accId}`)
-      .subscribe((res: any) => {
+    this.repo.deleteAccount(`api/account/${this.myAccount.accId}`).subscribe(
+      (res: any) => {
+        this.noti.showSuccess(
+          'Deleted Acount Successfully!!!',
+          'Success Message'
+        );
         console.log(res);
         this.clearForm();
         this.getAllAccounts();
-      });
+      },
+      (error: any) => {
+        this.noti.showError(error.error, 'Error Message');
+      }
+    );
   }
 
   clearForm() {

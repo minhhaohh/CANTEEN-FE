@@ -46,6 +46,16 @@ export class OrderRepositoryService {
     );
   };
 
+  public exportExcel = (route: string) => {
+    return this.http.get(
+      this.createCompleteRoute(route, this.envUrl.urlAddress),
+      {
+        observe: 'response',
+        responseType: 'blob',
+      }
+    );
+  };
+
   private createCompleteRoute = (route: string, envAddress: string) => {
     return `${envAddress}/${route}`;
   };

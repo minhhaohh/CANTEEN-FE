@@ -35,5 +35,33 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div
+        class="col-xl-2 col-lg-3 col-md-4 p-2"
+        *ngFor="let product of products"
+      >
+        <div class="product">
+          <img class="product-img" src="{{ product.image }}" alt="" />
+          <div class="wrap-product-price">
+            <span>{{ product.price }}đ</span>
+            <span class="product-star">*****</span>
+          </div>
+          <div class="wrap-product-name">
+            <a
+              class="product-name"
+              routerLink="/user/product-detail/{{ product.proId }}"
+              >{{ product.proName }}</a
+            >
+            <button
+              class="btn-add"
+              title="Add to cart"
+              (click)="addToCart(product)"
+            >
+              <mat-icon>shopping_cart</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

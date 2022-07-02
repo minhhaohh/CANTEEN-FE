@@ -24,6 +24,16 @@ export class ImportProductRepositoryService {
     );
   };
 
+  public exportExcel = (route: string) => {
+    return this.http.get(
+      this.createCompleteRoute(route, this.envUrl.urlAddress),
+      {
+        observe: 'response',
+        responseType: 'blob',
+      }
+    );
+  };
+
   public createImportProduct = (
     route: string,
     importProduct: ImportProduct

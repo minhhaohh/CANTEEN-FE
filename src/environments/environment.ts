@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlAddress: 'http://localhost:42694',
+  urlAddress: 'http://minhhaohh-001-site1.itempurl.com',
 };
 
 /*

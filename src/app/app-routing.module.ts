@@ -42,7 +42,6 @@ const routes: Routes = [
       {
         path: 'cart',
         component: ShopCartComponent,
-        data: { id: '1', name: 'Angular' },
       },
       {
         path: 'checkout',
@@ -57,7 +56,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: HomeComponent,
+        component: EmployeeComponent,
       },
       {
         path: 'home',
