@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlAddress: 'http://utc2canteen.com',
+  urlAddress: 'http://minhhaohh-001-site1.itempurl.com',
 };

@@ -13,6 +13,10 @@ export class FormatDate {
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   }
 
+  public dateToMonthYearString(date: Date): string {
+    return `${date.getMonth() + 1}-${date.getFullYear()}`;
+  }
+
   public ngbDateStructToDate(ngbDate: NgbDateStruct): Date {
     return new Date(`${ngbDate.year}-${ngbDate.month}-${ngbDate.day + 1}`);
   }

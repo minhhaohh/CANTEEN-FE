@@ -51,4 +51,6 @@ export class ShopProductDetailComponent implements OnInit {
         this.products = res as Product[];
       });
   }
+
+  addToCart() {}
 }

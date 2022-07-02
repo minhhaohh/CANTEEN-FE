@@ -25,12 +25,6 @@
   transform: translate(-50%, -50%);
 }
 
-.divChart {
-  display: block;
-  width: 400px;
-  height: 400px;
-}
-
 table {
   width: 100%;
   overflow-x: auto;
@@ -44,4 +38,10 @@ th.mat-header-cell {
   color: white;
   background-color: #17a2b8;
   font-size: 1rem;
+}
+
+.calendar-icon {
+  width: 16px;
+  display: flex;
+  justify-content: center;
 }

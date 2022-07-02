@@ -18,6 +18,7 @@ import { ShopComponent } from './components/shop/shop.component';
 import { ShopProductDetailComponent } from './components/shop-product-detail/shop-product-detail.component';
 import { ShopCartComponent } from './components/shop-cart/shop-cart.component';
 import { ShopCheckoutComponent } from './components/shop-checkout/shop-checkout.component';
+import { ShopAccountComponent } from './components/shop-account/shop-account.component';
 
 import { UserGuard } from './shared/guards/user.guard';
 
@@ -47,6 +48,10 @@ const routes: Routes = [
         path: 'checkout',
         component: ShopCheckoutComponent,
       },
+      {
+        path: 'account',
+        component: ShopAccountComponent,
+      },
     ],
     canActivate: [UserGuard],
   },
@@ -56,7 +61,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: EmployeeComponent,
+        component: HomeComponent,
       },
       {
         path: 'home',

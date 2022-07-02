@@ -52,6 +52,7 @@ import { ShopCheckoutComponent } from './components/shop-checkout/shop-checkout.
 import { LoginComponent } from './pages/login/login.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { AccountComponent } from './components/account/account.component';
+import { ShopAccountComponent } from './components/shop-account/shop-account.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { AccountComponent } from './components/account/account.component';
     LoginComponent,
     SignUpComponent,
     AccountComponent,
+    ShopAccountComponent,
   ],
   imports: [
     BrowserModule,

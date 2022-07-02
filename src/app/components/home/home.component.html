@@ -1,4 +1,70 @@
 <div class="container-fluid page">
   <div class="page__box p-3 mt-2">Home</div>
-  <div class="page__content shadow p-3 position-relative">HOME</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="row">
+      <div class="col-md-2 mb-3">
+        <label for="from-date">From Date</label>
+        <div class="input-group">
+          <input
+            class="form-control"
+            name="dpfrom"
+            ngbDatepicker
+            #d="ngbDatepicker"
+            [(ngModel)]="datepickerFrom"
+          />
+          <button
+            class="btn btn-outline-secondary calendar"
+            (click)="d.toggle()"
+            type="button"
+          >
+            <mat-icon class="calendar-icon">calendar_today</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-2 mb-3">
+        <label for="to-date">To Date</label>
+        <div class="input-group">
+          <input
+            class="form-control"
+            name="dpto"
+            ngbDatepicker
+            #c="ngbDatepicker"
+            [(ngModel)]="datepickerTo"
+          />
+          <button
+            class="btn btn-outline-secondary calendar"
+            (click)="c.toggle()"
+            type="button"
+          >
+            <mat-icon class="calendar-icon">calendar_today</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-1 mb-3 text-right mt-2">
+        <br />
+        <button
+          type="button"
+          class="btn btn-primary ml-2 d-inline-flex"
+          (click)="getDataFromDateToDate()"
+        >
+          <mat-icon>search</mat-icon>
+          <span>&nbsp;Search</span>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <h1 class="text-center">MONEY IN: {{ totalIn }}</h1>
+        <div class="divChart">
+          <canvas id="chart-order" width="1200px"></canvas>
+        </div>
+      </div>
+      <div class="col-6">
+        <h1 class="text-center">MONEY OUT: {{ totalOut }}</h1>
+        <div class="divChart">
+          <canvas id="chart-import-product"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

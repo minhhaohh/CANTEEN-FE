@@ -73,7 +73,6 @@ export class OrderReportComponent implements OnInit, AfterViewInit {
     this.orderRepo.getAllOrders('api/order').subscribe((res: any) => {
       this.dataSourceOrder.data = res as Order[];
       const group = this.groupBy(this.dataSourceOrder.data, 'createdDate');
-
       Object.keys(group).forEach((key) => {
         this.labelsOrder.push(this.formatDate.dateToDateString(new Date(key)));
         var total = 0;

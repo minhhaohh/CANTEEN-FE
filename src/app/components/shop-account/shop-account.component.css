@@ -1,0 +1,16 @@
+@import "../home/home.component.css";
+
+.page__box {
+  background-color: #0ea4dd;
+}
+
+.account-title {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.calendar-icon {
+  width: 16px;
+  display: flex;
+  justify-content: center;
+}
